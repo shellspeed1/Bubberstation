@@ -107,12 +107,6 @@
 		return
 	return ..(ceiling)
 
-///Used for marking mapping errors. These should only be created by cases explicitly caught by unit tests, and should NEVER actually appear in production.
-/obj/effect/mapping_error
-	name = "I AM ERROR"
-	desc = "IF YOU SEE ME, YELL AT A MAPPER!!!"
-	icon = 'icons/effects/mapping_helpers.dmi'
-	icon_state = "mapping_error"
 
 /obj/effect/mapping_helpers
 	icon = 'icons/effects/mapping_helpers.dmi'
@@ -569,17 +563,17 @@
 	if(!mapload)
 		log_mapping("[src] spawned outside of mapload!")
 		return INITIALIZE_HINT_QDEL
-	return INITIALIZE_HINT_LATELOAD
+	check_validity()
+	return INITIALIZE_HINT_QDEL
 
-/obj/effect/mapping_helpers/turn_off_lights_with_lightswitch/LateInitialize()
+/obj/effect/mapping_helpers/turn_off_lights_with_lightswitch/proc/check_validity()
 	var/area/needed_area = get_area(src)
 	if(!needed_area.lightswitch)
 		stack_trace("[src] at [AREACOORD(src)] [(needed_area.type)] tried to turn lights off but they are already off!")
 	var/obj/machinery/light_switch/light_switch = locate(/obj/machinery/light_switch) in needed_area
 	if(!light_switch)
-		CRASH("Trying to turn off lights with lightswitch in area without lightswitches. In [(needed_area.type)] to be precise.")
-	light_switch.set_lights(FALSE)
-	qdel(src)
+		stack_trace("Trying to turn off lights with lightswitch in area without lightswitches. In [(needed_area.type)] to be precise.")
+	needed_area.lightswitch = FALSE
 
 //needs to do its thing before spawn_rivers() is called
 INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
@@ -929,7 +923,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_atoms_ontop)
 					var/datum/species/new_human_species = GLOB.species_list[species_to_pick]
 					if(new_human_species)
 						new_human.set_species(new_human_species)
-						new_human.fully_replace_character_name(new_human.real_name, new_human.generate_random_mob_name())
+						new_human_species = new_human.dna.species
+						new_human.fully_replace_character_name(new_human.real_name, new_human_species.random_name(new_human.gender, TRUE, TRUE))
 					else
 						stack_trace("failed to spawn cadaver with species ID [species_to_pick]") //if it's invalid they'll just be a human, so no need to worry too much aside from yelling at the server owner lol.
 		else
@@ -1078,7 +1073,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_atoms_ontop)
 
 /obj/effect/mapping_helpers/airlock_note_placer/LateInitialize()
 	var/turf/turf = get_turf(src)
-	if(note_path && !ispath(note_path, /obj/item/paper)) //don't put non-paper in the paper slot thank you
+	if(note_path && !istype(note_path, /obj/item/paper)) //don't put non-paper in the paper slot thank you
 		log_mapping("[src] at [x],[y] had an improper note_path path, could not place paper note.")
 		qdel(src)
 		return
@@ -1189,7 +1184,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_atoms_ontop)
 	if(response.errored || response.status_code != 200)
 		query_in_progress = FALSE
 		CRASH("Failed to fetch mapped custom json from url [json_url], code: [response.status_code], error: [response.error]")
-	var/json_data = response.body
+	var/json_data = response["body"]
 	json_cache[json_url] = json_data
 	query_in_progress = FALSE
 	return json_data

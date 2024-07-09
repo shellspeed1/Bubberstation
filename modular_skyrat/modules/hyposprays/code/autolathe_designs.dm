@@ -13,7 +13,7 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL
 
-/datum/techweb_node/medbay_equip/New()
+/datum/techweb_node/basic_medical/New()
 	design_ids += list(
 		"hypovial",
 	)
@@ -30,7 +30,7 @@
 	build_path = /obj/item/reagent_containers/cup/vial/large
 
 /datum/design/hypokit
-	name = "Hypospray Case"
+	name = "Hypospray Kit"
 	id = "hypokit"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(
@@ -44,17 +44,16 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL
 
-/datum/techweb_node/chem_synthesis/New()
+/datum/techweb_node/biotech/New()
 	design_ids += list(
 		"large_hypovial",
 		"hypokit",
-		"hypomkii",
 	)
 	return ..()
 
 /// Hyposprays
 /datum/design/hypokit/deluxe
-	name = "Deluxe Hypospray Case"
+	name = "Deluxe Hypospray Kit"
 	id = "hypokit_deluxe"
 	materials = list(
 		/datum/material/plastic = SHEET_MATERIAL_AMOUNT * 6,
@@ -64,7 +63,7 @@
 	build_path = /obj/item/storage/hypospraykit/cmo/empty
 
 /datum/design/hypomkii
-	name = "Hypospray Mk. II"
+	name = "MkII Hypospray"
 	id = "hypomkii"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(
@@ -79,50 +78,15 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL
 
-/datum/design/hypomkii/combat
-	name = "Hypospray Mk. II Combat"
-	id = "hypomkii_combat"
-	build_type = PROTOLATHE | AWAY_LATHE
-	materials = list(
-		/datum/material/plastic = SHEET_MATERIAL_AMOUNT * 5,
-		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 3,
-		/datum/material/silver = SHEET_MATERIAL_AMOUNT,
-		/datum/material/titanium = SHEET_MATERIAL_AMOUNT,
-	)
-	build_path = /obj/item/hypospray/mkii/combat
-	category = list(
-		RND_CATEGORY_INITIAL,
-		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_MEDICAL_ADVANCED,
-	)
-	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL
-
-/datum/design/hypomkii/piercing
-	name = "Hypospray Mk. II Advanced"
-	id = "hypomkii_advanced"
-	build_type = PROTOLATHE | AWAY_LATHE
-	materials = list(
-		/datum/material/plastic = SHEET_MATERIAL_AMOUNT * 5,
-		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 3,
-		/datum/material/silver = SHEET_MATERIAL_AMOUNT,
-		/datum/material/titanium = SHEET_MATERIAL_AMOUNT,
-	)
-	build_path = /obj/item/hypospray/mkii/piercing
-	category = list(
-		RND_CATEGORY_INITIAL,
-		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_MEDICAL_ADVANCED,
-	)
-	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL
-
-/datum/techweb_node/medbay_equip_adv/New()
+/datum/techweb_node/adv_biotech/New()
 	design_ids += list(
 		"hypokit_deluxe",
-		"hypomkii_advanced",
-		"hypomkii_combat",
+		"hypomkii",
 	)
 	return ..()
 
 /datum/design/hypomkii/deluxe
-	name = "Hypospray Mk. II Deluxe Upgrade"
+	name = "MkII Hypospray Upgrade Kit"
 	id = "hypomkii_deluxe"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(
@@ -133,15 +97,13 @@
 	build_path = /obj/item/device/custom_kit/deluxe_hypo2
 	category = list(
 		RND_CATEGORY_INITIAL,
-		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_MEDICAL_ADVANCED,
+		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_MEDICAL,
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL
 
-/datum/techweb_node/alien_surgery/New()
+/datum/techweb_node/alien_bio/New()
 	design_ids += list(
 		"hypomkii_deluxe",
-		"hypomkii_advanced",
-		"hypomkii_combat",
 	)
 	return ..()
 

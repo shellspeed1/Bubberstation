@@ -1,13 +1,7 @@
-import {
-  BlockQuote,
-  Button,
-  Dimmer,
-  Section,
-  Stack,
-} from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import { BooleanLike } from 'common/react';
 
 import { useBackend } from '../backend';
+import { BlockQuote, Button, Dimmer, Section, Stack } from '../components';
 import { Window } from '../layouts';
 import { Rules } from './AntagInfoRules'; // SKYRAT EDIT ADDITION
 import { Objective, ObjectivePrintout } from './common/Objectives';

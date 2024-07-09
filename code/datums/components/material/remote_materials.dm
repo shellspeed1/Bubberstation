@@ -144,10 +144,12 @@ handles linking back and forth.
 
 	return COMPONENT_NO_AFTERATTACK
 
-/datum/component/remote_materials/proc/OnMultitool(datum/source, mob/user, obj/item/multitool/M)
+/datum/component/remote_materials/proc/OnMultitool(datum/source, mob/user, obj/item/I)
 	SIGNAL_HANDLER
 
-	. = ITEM_INTERACT_BLOCKING
+	if(!I.multitool_check_buffer(user, I))
+		return ITEM_INTERACT_BLOCKING
+	var/obj/item/multitool/M = I
 	if (!QDELETED(M.buffer) && istype(M.buffer, /obj/machinery/ore_silo))
 		if (silo == M.buffer)
 			to_chat(user, span_warning("[parent] is already connected to [silo]!"))

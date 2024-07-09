@@ -425,15 +425,8 @@
 	name = "salve globule"
 	icon_state = "glob_projectile"
 	shrapnel_type = /obj/item/mending_globule/hardlight
-	embed_type = /datum/embed_data/salve_globule
+	embedding = list("embed_chance" = 100, ignore_throwspeed_threshold = TRUE, "pain_mult" = 0, "jostle_pain_mult" = 0, "fall_chance" = 0)
 	damage = 0
-
-/datum/embed_data/salve_globule
-	embed_chance = 100
-	ignore_throwspeed_threshold = TRUE
-	pain_mult = 0
-	jostle_pain_mult = 0
-	fall_chance = 0
 
 /obj/projectile/energy/medical/utility/salve/on_hit(mob/living/target, blocked = 0, pierce_hit)
 	if(!IsLivingHuman(target)) //No using this on the dead or synths.
@@ -514,7 +507,7 @@
 /obj/item/mending_globule/hardlight
 	name = "salve globule"
 	desc = "A ball of regenerative synthetic plant matter, contained within a soft hardlight field."
-	embed_type = /datum/embed_data/salve_globule
+	embedding = list("embed_chance" = 100, ignore_throwspeed_threshold = TRUE, "pain_mult" = 0, "jostle_pain_mult" = 0, "fall_chance" = 0)
 	icon = 'modular_skyrat/modules/cellguns/icons/obj/guns/mediguns/misc.dmi'
 	icon_state = "globule"
 	heals_left = 40 //This means it'll be heaing 15 damage per type max.
@@ -567,15 +560,15 @@
 	. = ..()
 	qdel(src)
 
-/obj/structure/bed/medical/medigun/mouse_drop_dragged(atom/over, mob/user, src_location, over_location, params)
-	if(over == user && Adjacent(user))
-		if(!ishuman(user) || !user.can_perform_action(src))
+/obj/structure/bed/medical/medigun/MouseDrop(over_object, src_location, over_location)
+	if(over_object == usr && Adjacent(usr))
+		if(!ishuman(usr) || !usr.can_perform_action(src))
 			return FALSE
 
 		if(has_buckled_mobs())
 			return FALSE
 
-		user.visible_message(span_notice("[user] deactivates \the [src]."), span_notice("You deactivate \the [src]."))
+		usr.visible_message(span_notice("[usr] deactivates \the [src]."), span_notice("You deactivate \the [src]."))
 		qdel(src)
 
 //Oppressive Force Relocation

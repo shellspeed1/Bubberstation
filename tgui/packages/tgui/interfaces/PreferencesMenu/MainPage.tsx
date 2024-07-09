@@ -2,7 +2,7 @@ import { filter, map, sortBy } from 'common/collections';
 import { exhaustiveCheck } from 'common/exhaustive';
 import { classes } from 'common/react';
 import { createSearch } from 'common/string';
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 
 import { sendAct, useBackend } from '../../backend';
 import {
@@ -23,7 +23,6 @@ import {
   RandomSetting,
   ServerData,
 } from './data';
-import { DeleteCharacterPopup } from './DeleteCharacterPopup';
 import { MultiNameInput, NameInput } from './names';
 import { PageButton } from './PageButton';
 import features from './preferences/features';
@@ -46,6 +45,7 @@ const CLOTHING_SELECTION_MULTIPLIER = 5.2;
 const CharacterControls = (props: {
   handleRotate: () => void;
   handleOpenSpecies: () => void;
+  handleLoadout: () => void; // SKYRAT EDIT ADDITION
   handleFood: () => void; // SKYRAT EDIT ADDITION
   gender: Gender;
   setGender: (gender: Gender) => void;
@@ -82,6 +82,17 @@ const CharacterControls = (props: {
         </Stack.Item>
       )}
       {/* SKYRAT EDIT ADDITION START */}
+      {props.handleLoadout && (
+        <Stack.Item>
+          <Button
+            onClick={props.handleLoadout}
+            fontSize="22px"
+            icon="suitcase"
+            tooltip="Show Loadout Menu"
+            tooltipPosition="top"
+          />
+        </Stack.Item>
+      )}
       <Stack.Item>
         <Button
           onClick={props.handleFood}
@@ -399,7 +410,6 @@ export const PreferenceList = (props: {
   preferences: Record<string, unknown>;
   randomizations: Record<string, RandomSetting>;
   maxHeight: string;
-  children?: ReactNode;
 }) => {
   return (
     <Stack.Item
@@ -458,8 +468,6 @@ export const PreferenceList = (props: {
           },
         )}
       </LabeledList>
-
-      {props.children}
     </Stack.Item>
   );
 };
@@ -497,8 +505,6 @@ export const MainPage = (props: { openSpecies: () => void }) => {
   const [currentClothingMenu, setCurrentClothingMenu] = useState<string | null>(
     null,
   );
-  const [deleteCharacterPopupOpen, setDeleteCharacterPopupOpen] =
-    useState(false);
   const [multiNameInputOpen, setMultiNameInputOpen] = useState(false);
   const [randomToggleEnabled] = useRandomToggleState();
 
@@ -614,12 +620,6 @@ export const MainPage = (props: { openSpecies: () => void }) => {
               />
             )}
 
-            {deleteCharacterPopupOpen && (
-              <DeleteCharacterPopup
-                close={() => setDeleteCharacterPopupOpen(false)}
-              />
-            )}
-
             <Stack height={`${CLOTHING_SIDEBAR_ROWS * CLOTHING_CELL_SIZE}px`}>
               <Stack.Item>
                 <Stack vertical fill>
@@ -629,6 +629,9 @@ export const MainPage = (props: { openSpecies: () => void }) => {
                       handleOpenSpecies={props.openSpecies}
                       handleRotate={() => {
                         act('rotate');
+                      }}
+                      handleLoadout={() => {
+                        act('open_loadout');
                       }}
                       // SKYRAT EDIT ADDITION - BEGIN
                       handleFood={() => {
@@ -729,19 +732,6 @@ export const MainPage = (props: { openSpecies: () => void }) => {
                     >
                       Character Visuals
                     </PageButton>
-                    <Box my={0.5}>
-                      <Button
-                        color="red"
-                        disabled={
-                          Object.values(data.character_profiles).filter(
-                            (name) => name,
-                          ).length < 2
-                        } // check if existing chars more than one
-                        onClick={() => setDeleteCharacterPopupOpen(true)}
-                      >
-                        Delete Character
-                      </Button>
-                    </Box>
                   </Stack.Item>
                   <Stack.Item grow>
                     <PageButton

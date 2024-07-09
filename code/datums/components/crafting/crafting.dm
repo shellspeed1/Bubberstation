@@ -75,14 +75,8 @@
 		if(contents[requirement_path] < R.chem_catalysts[requirement_path])
 			return FALSE
 
-	var/mech_found = FALSE
 	for(var/machinery_path in R.machinery)
-		mech_found = FALSE
-		for(var/obj/machinery/machine as anything in machines)
-			if(ispath(machine, machinery_path))//We don't care for volume with machines, just if one is there or not
-				mech_found = TRUE
-				break
-		if(!mech_found)
+		if(!machines[machinery_path])//We don't care for volume with machines, just if one is there or not
 			return FALSE
 
 	for(var/required_structure_path in R.structures)

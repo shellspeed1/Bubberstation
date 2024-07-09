@@ -58,16 +58,17 @@
 	icon_state = "[choice]"
 	playsound(src, 'sound/machines/click.ogg', 40, TRUE)
 
-/obj/item/universal_scanner/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	if(!isobj(interacting_with))
-		return NONE
+/obj/item/universal_scanner/afterattack(obj/object, mob/user, proximity)
+	. = ..()
+	if(!istype(object) || !proximity)
+		return
+	. |= AFTERATTACK_PROCESSED_ITEM
 	if(scanning_mode == SCAN_EXPORTS)
-		export_scan(interacting_with, user)
-		return ITEM_INTERACT_SUCCESS
+		export_scan(object, user)
+		return .
 	if(scanning_mode == SCAN_PRICE_TAG)
-		price_tag(interacting_with, user)
-		return ITEM_INTERACT_SUCCESS
-	return NONE
+		price_tag(target = object, user = user)
+	return .
 
 /obj/item/universal_scanner/attackby(obj/item/attacking_item, mob/user, params)
 	. = ..()
@@ -122,12 +123,11 @@
 		new_custom_price = chosen_price
 		to_chat(user, span_notice("[src] will now give things a [new_custom_price] cr tag."))
 
-/obj/item/universal_scanner/item_ctrl_click(mob/user)
-	. = CLICK_ACTION_BLOCKING
+/obj/item/universal_scanner/CtrlClick(mob/user)
+	. = ..()
 	if(scanning_mode == SCAN_SALES_TAG)
 		payments_acc = null
 		to_chat(user, span_notice("You clear the registered account."))
-		return CLICK_ACTION_SUCCESS
 
 /obj/item/universal_scanner/click_alt(mob/user)
 	if(!scanning_mode == SCAN_SALES_TAG)

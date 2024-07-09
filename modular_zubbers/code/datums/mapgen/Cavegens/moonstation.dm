@@ -21,11 +21,9 @@
 	)
 
 	weighted_feature_spawn_list = list(
-		/obj/structure/geyser/random = 4,
-		/obj/structure/ore_vent/random/moonstation = 1
+		/obj/structure/geyser/random = 1
 	)
 
-	feature_spawn_chance = 0.1
 	mob_spawn_chance = 1
 	initial_closed_chance = 30
 	smoothing_iterations = 50
@@ -33,18 +31,11 @@
 	death_limit = 3
 
 
-
-
 //Underground
 /datum/map_generator/cave_generator/moonstation/cave
 
-	weighted_open_turf_types = list(
-		/turf/open/misc/moonstation_rock = 1
-	)
-	weighted_closed_turf_types = list(
-		/turf/closed/mineral/random/lunar_cave = 98,
-		/turf/closed/mineral/strange_rock/lunar_cave = 2
-	)
+	weighted_open_turf_types = list(/turf/open/misc/moonstation_rock = 1)
+	weighted_closed_turf_types = list(/turf/closed/mineral/random/lunar_cave = 1)
 
 
 	weighted_mob_spawn_list = list(
@@ -72,11 +63,17 @@
 		/obj/structure/geyser/hollowwater = 10,
 		/obj/structure/geyser/plasma_oxide = 10,
 		/obj/structure/geyser/protozine = 10,
+		/obj/structure/geyser/random = 2,
 		/obj/structure/geyser/wittel = 10,
-		/obj/structure/ore_vent/random/moonstation/cave = 10
+		/obj/structure/ore_vent/random = 5,
+		/obj/structure/ore_vein/diamond = 10,
+		/obj/structure/ore_vein/gold = 20,
+		/obj/structure/ore_vein/iron = 30,
+		/obj/structure/ore_vein/plasma = 15,
+		/obj/structure/ore_vein/silver = 20,
+		/obj/structure/ore_vein/stone = 30
 	)
 
-	feature_spawn_chance = 0.2
 	mob_spawn_chance = 4
 	initial_closed_chance = 45
 	smoothing_iterations = 50

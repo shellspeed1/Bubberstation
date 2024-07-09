@@ -11,7 +11,6 @@ import { JobsPage } from './JobsPage';
 import { LanguagesPage } from './LanguagesMenu';
 import { LimbsPage } from './LimbsPage';
 // SKYRAT EDIT END
-import { LoadoutPage } from './loadout/index';
 import { MainPage } from './MainPage';
 import { PageButton } from './PageButton';
 import { QuirksPage } from './QuirksPage';
@@ -27,7 +26,6 @@ enum Page {
   // SKYRAT EDIT END
   Species,
   Quirks,
-  Loadout,
 }
 
 const CharacterProfiles = (props: {
@@ -97,11 +95,6 @@ export const CharacterPreferenceWindow = (props) => {
     case Page.Quirks:
       pageContents = <QuirksPage />;
       break;
-
-    case Page.Loadout:
-      pageContents = <LoadoutPage />;
-      break;
-
     default:
       exhaustiveCheck(currentPage);
   }
@@ -121,6 +114,7 @@ export const CharacterPreferenceWindow = (props) => {
               profiles={data.character_profiles}
             />
           </Stack.Item>
+
           {!data.content_unlocked && (
             <Stack.Item align="center">
               Buy BYOND premium for more slots!
@@ -139,16 +133,6 @@ export const CharacterPreferenceWindow = (props) => {
                   otherActivePages={[Page.Species]}
                 >
                   Character
-                </PageButton>
-              </Stack.Item>
-
-              <Stack.Item grow>
-                <PageButton
-                  currentPage={currentPage}
-                  page={Page.Loadout}
-                  setPage={setCurrentPage}
-                >
-                  Loadout
                 </PageButton>
               </Stack.Item>
 

@@ -1,5 +1,5 @@
 /datum/armament_entry/company_import/nri_surplus
-	category = COMPANY_NAME_NRI_SURPLUS
+	category = NRI_SURPLUS_COMPANY_NAME
 	company_bitflag = CARGO_COMPANY_NRI_SURPLUS
 
 // Various NRI clothing items

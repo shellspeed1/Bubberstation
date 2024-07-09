@@ -100,8 +100,7 @@
 
 /obj/item/aquarium_kit/Initialize(mapload)
 	. = ..()
-	var/static/list/recipes = list(/datum/crafting_recipe/aquarium)
-	AddElement(/datum/element/slapcrafting, recipes)
+	AddComponent(/datum/component/slapcrafting, /datum/crafting_recipe/aquarium)
 
 /obj/item/aquarium_prop
 	name = "generic aquarium prop"
@@ -110,11 +109,10 @@
 
 	w_class = WEIGHT_CLASS_TINY
 	var/layer_mode = AQUARIUM_LAYER_MODE_BOTTOM
-	var/beauty = 150
 
 /obj/item/aquarium_prop/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/aquarium_content, icon, beauty = beauty)
+	AddComponent(/datum/component/aquarium_content, icon)
 
 /obj/item/aquarium_prop/rocks
 	name = "rocks"

@@ -129,7 +129,7 @@
 	sorting_list = list()
 	return CLICK_ACTION_SUCCESS
 
-/obj/effect/decal/conveyor_sorter/click_ctrl(mob/user)
+/obj/effect/decal/conveyor_sorter/CtrlClick(mob/user)
 	visible_message("[src] begins to ping violently!")
 	playsound(src, 'sound/machines/ping.ogg', 30, TRUE)
 	qdel(src)
@@ -156,14 +156,14 @@
 	departmental_flags = DEPARTMENT_BITFLAG_CARGO
 
 /datum/techweb_node/conveyor_sorter
-	id = TECHWEB_NODE_CONVEYOR_SORTER
+	id = "conveyorsorter"
 	display_name = "Conveyor Sorter"
 	description = "Finally, the ability to automatically sort stuff."
-	prereq_ids = list(TECHWEB_NODE_BLUESPACE_THEORY)
+	prereq_ids = list("bluespace_basic", "engineering")
 	design_ids = list(
 		"conveysorter",
 	)
-	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_2_POINTS)
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 
 /obj/item/conveyor_sorter/improved
 	name = "improved conveyor sorter lister"
@@ -196,11 +196,11 @@
 
 
 /datum/techweb_node/conveyor_sorter/improved
-	id = TECHWEB_NODE_CONVEYOR_SORTER_IMPROVED
+	id = "conveyor_sorter_improved"
 	display_name = "Improved Conveyor Sorter"
 	description = "An improved version of the conveyor sorter, this one allows for more control over sorting."
-	prereq_ids = list(TECHWEB_NODE_APPLIED_BLUESPACE)
+	prereq_ids = list("practical_bluespace", "conveyorsorter")
 	design_ids = list(
 		"conveyor_sorter_improved",
 	)
-	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_3_POINTS) // Why.
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 7500) // Why.

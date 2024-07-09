@@ -69,6 +69,8 @@
 		COOLDOWN_START(src, grab_cooldown, use_cooldown)
 		return
 
+/obj/item/physic_manipulation_tool/afterattack_secondary(atom/target, mob/user, proximity_flag, click_parameters)
+	. = ..()
 
 /obj/item/physic_manipulation_tool/dropped(mob/user, silent)
 	. = ..()

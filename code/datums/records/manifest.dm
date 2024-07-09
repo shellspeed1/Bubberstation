@@ -123,7 +123,6 @@ GLOBAL_DATUM_INIT(manifest, /datum/manifest, new)
 
 	var/datum/record/locked/lockfile = new(
 		age = person.age,
-		chrono_age = person.chrono_age, // SKYRAT EDIT ADDITION - Chronological age
 		blood_type = record_dna.blood_type,
 		character_appearance = character_appearance,
 		dna_string = record_dna.unique_enzymes,
@@ -141,7 +140,6 @@ GLOBAL_DATUM_INIT(manifest, /datum/manifest, new)
 
 	new /datum/record/crew(
 		age = person.age,
-		chrono_age = person.chrono_age, // SKYRAT EDIT ADDITION - Chronological age
 		blood_type = record_dna.blood_type,
 		character_appearance = character_appearance,
 		dna_string = record_dna.unique_enzymes,

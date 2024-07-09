@@ -9,15 +9,14 @@
 	icon_state = "setup_medium_med"
 	maxHealth = 300
 	health = 300
-	living_flags = NONE
+	living_flags = 0
 	light_system = OVERLAY_LIGHT_DIRECTIONAL
 	light_on = FALSE
 
 /mob/living/circuit_drone/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/shell, list(
-		new /obj/item/circuit_component/bot_circuit(),
-		new /obj/item/circuit_component/remotecam/drone()
+		new /obj/item/circuit_component/bot_circuit()
 	), SHELL_CAPACITY_LARGE)
 
 /mob/living/circuit_drone/examine(mob/user)

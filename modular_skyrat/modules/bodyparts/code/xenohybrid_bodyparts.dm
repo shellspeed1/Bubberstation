@@ -2,7 +2,6 @@
 /obj/item/bodypart/head/mutant/xenohybrid
 	icon_greyscale = BODYPART_ICON_XENO
 	limb_id = SPECIES_XENO
-	teeth_count = 0
 
 /obj/item/bodypart/chest/mutant/xenohybrid
 	icon_greyscale = BODYPART_ICON_XENO

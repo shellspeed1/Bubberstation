@@ -10,14 +10,6 @@ import { FeatureDropdownInput } from '../dropdowns';
 export const sound_ambience: FeatureToggle = {
   name: 'Enable ambience',
   category: 'SOUND',
-  description: `Ambience refers to the more noticeable ambient sounds that play on occasion.`,
-  component: CheckboxInput,
-};
-
-export const sound_breathing: FeatureToggle = {
-  name: 'Enable breathing sounds',
-  category: 'SOUND',
-  description: 'When enabled, hear breathing sounds when using internals.',
   component: CheckboxInput,
 };
 
@@ -89,7 +81,6 @@ export const sound_midi: FeatureToggle = {
 export const sound_ship_ambience: FeatureToggle = {
   name: 'Enable ship ambience',
   category: 'SOUND',
-  description: `Ship ambience refers to the low ambient buzz that plays on loop.`,
   component: CheckboxInput,
 };
 

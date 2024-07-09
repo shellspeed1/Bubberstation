@@ -427,7 +427,6 @@
 
 	if(created)
 		created.setDir(builder.dir)
-		SEND_SIGNAL(created, COMSIG_ATOM_CONSTRUCTED, builder)
 		on_item_crafted(builder, created)
 
 	builder.mind.adjust_experience(/datum/skill/construction, 5) //SKYRAT EDIT: Construction Skill

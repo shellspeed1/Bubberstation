@@ -50,7 +50,11 @@
 	)
 
 
-/obj/structure/stripper_pole/click_ctrl(mob/user)
+/obj/structure/stripper_pole/CtrlClick(mob/user)
+	. = ..()
+	if(. == FALSE)
+		return FALSE
+
 	var/choice = show_radial_menu(user, src, pole_designs, radius = 50, require_near = TRUE)
 	if(!choice)
 		return FALSE
@@ -153,7 +157,7 @@
 		dancer.forceMove(get_turf(src))
 		dancer = null
 
-/obj/structure/stripper_pole/click_ctrl_shift(mob/user)
+/obj/structure/stripper_pole/CtrlShiftClick(mob/user)
 	. = ..()
 	if(. == FALSE)
 		return FALSE

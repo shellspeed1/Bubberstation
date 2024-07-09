@@ -8,7 +8,7 @@
 
 	// Disable normal cleaning if there are liquids.
 	if(isturf(atom_to_clean) && turf_to_clean.liquids)
-		return CLEAN_BLOCKED
+		return DO_NOT_CLEAN
 
 	return ..()
 

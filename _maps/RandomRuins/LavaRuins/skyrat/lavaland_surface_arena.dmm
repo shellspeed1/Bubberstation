@@ -268,7 +268,8 @@
 	dir = 1
 	},
 /obj/effect/decal/remains/human{
-	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them."
+	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them.";
+	layer = 33
 	},
 /obj/item/clothing/head/helmet/gladiator,
 /turf/open/lava/smooth/lava_land_surface{
@@ -317,7 +318,8 @@
 "ot" = (
 /obj/structure/stone_tile/slab,
 /obj/effect/decal/remains/human{
-	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them."
+	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them.";
+	layer = 33
 	},
 /turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
@@ -408,7 +410,8 @@
 "up" = (
 /obj/structure/stone_tile/slab,
 /obj/effect/decal/remains/human{
-	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them."
+	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them.";
+	layer = 33
 	},
 /obj/item/clothing/head/helmet/gladiator,
 /turf/open/indestructible/boss,
@@ -487,7 +490,8 @@
 	dir = 1
 	},
 /obj/effect/decal/remains/human{
-	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them."
+	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them.";
+	layer = 33
 	},
 /turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
@@ -515,7 +519,8 @@
 	dir = 1
 	},
 /obj/effect/decal/remains/human{
-	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them."
+	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them.";
+	layer = 33
 	},
 /turf/open/lava/smooth/lava_land_surface{
 	slowdown = 0
@@ -606,7 +611,8 @@
 	dir = 1
 	},
 /obj/effect/decal/remains/human{
-	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them."
+	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them.";
+	layer = 33
 	},
 /obj/item/clothing/under/costume/gladiator/ash_walker,
 /turf/open/indestructible/boss,
@@ -636,7 +642,8 @@
 	dir = 4
 	},
 /obj/effect/decal/remains/human{
-	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them."
+	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them.";
+	layer = 33
 	},
 /turf/open/lava/smooth/lava_land_surface{
 	slowdown = 0
@@ -898,7 +905,8 @@
 	dir = 8
 	},
 /obj/effect/decal/remains/human{
-	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them."
+	desc = "They look like remains, whether ash walker or miner you cannot tell. They have a strange aura about them.";
+	layer = 33
 	},
 /obj/item/clothing/under/costume/gladiator/ash_walker,
 /turf/open/lava/smooth/lava_land_surface{

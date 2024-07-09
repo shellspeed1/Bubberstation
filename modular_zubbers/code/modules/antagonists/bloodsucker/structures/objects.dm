@@ -112,9 +112,6 @@
 				return TRUE
 	return FALSE
 
-/datum/embed_data/stake
-	embed_chance = 20
-
 /obj/item/stake
 	name = "wooden stake"
 	desc = "A simple wooden stake carved to a sharp point."
@@ -129,7 +126,7 @@
 	attack_verb_continuous = list("staked", "stabbed", "tore into")
 	attack_verb_simple = list("staked", "stabbed", "tore into")
 	sharpness = SHARP_EDGED
-	embed_data = /datum/embed_data/stake
+	embedding = list("embed_chance" = 20)
 	force = 6
 	throwforce = 10
 	max_integrity = 30
@@ -195,10 +192,6 @@
 		return TRUE
 	return FALSE
 
-/datum/embed_data/stake/hardened
-	embed_chance = 35
-	fall_chance = 0
-
 /// Created by welding and acid-treating a simple stake.
 /obj/item/stake/hardened
 	name = "hardened stake"
@@ -207,16 +200,12 @@
 	force = 8
 	throwforce = 12
 	armour_penetration = 10
-	embed_data = /datum/embed_data/stake/hardened
+	embedding = list("embed_chance" = 35, "fall_chance" = 0)
 	staketime = 12 SECONDS
 
 /obj/item/stake/hardened/examine_more(mob/user)
 	. = ..()
 	. += span_notice("The [src] won't fall out by itself, if embedded in someone.")
-
-/datum/embed_data/stake/silver
-	embed_chance = 65
-	fall_chance = 0
 
 /obj/item/stake/hardened/silver
 	name = "silver stake"
@@ -227,7 +216,7 @@
 	force = 9
 	armour_penetration = 25
 	custom_materials = list(/datum/material/silver = SHEET_MATERIAL_AMOUNT)
-	embed_data = /datum/embed_data/stake/silver
+	embedding = list("embed_chance" = 65, "fall_chance" = 0)
 	staketime = 15 SECONDS
 	kills_blodsuckers = TRUE
 

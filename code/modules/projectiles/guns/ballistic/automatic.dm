@@ -41,12 +41,12 @@
 	fire_delay = 2
 	burst_size = 3
 	pin = /obj/item/firing_pin/implant/pindicate
+	can_bayonet = TRUE
+	knife_x_offset = 26
+	knife_y_offset = 12
 	mag_display = TRUE
 	mag_display_ammo = TRUE
 	empty_indicator = TRUE
-
-/obj/item/gun/ballistic/automatic/c20r/add_bayonet_point()
-	AddComponent(/datum/component/bayonet_attachable, offset_x = 26, offset_y = 12)
 
 /obj/item/gun/ballistic/automatic/c20r/update_overlays()
 	. = ..()
@@ -75,6 +75,9 @@
 	can_suppress = FALSE
 	burst_size = 1
 	actions_types = list()
+	can_bayonet = TRUE
+	knife_x_offset = 25
+	knife_y_offset = 12
 	mag_display = TRUE
 	mag_display_ammo = TRUE
 	empty_indicator = TRUE
@@ -82,9 +85,6 @@
 /obj/item/gun/ballistic/automatic/wt550/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, 0.3 SECONDS)
-
-/obj/item/gun/ballistic/automatic/wt550/add_bayonet_point()
-	AddComponent(/datum/component/bayonet_attachable, offset_x = 25, offset_y = 12)
 
 /obj/item/gun/ballistic/automatic/plastikov
 	name = "\improper PP-95 SMG"
@@ -159,18 +159,17 @@
 	underbarrel = new /obj/item/gun/ballistic/revolver/grenadelauncher/unrestricted(src)
 	update_appearance()
 
-/obj/item/gun/ballistic/automatic/m90/try_fire_gun(atom/target, mob/living/user, params)
-	if(LAZYACCESS(params2list(params), RIGHT_CLICK))
-		return underbarrel.try_fire_gun(target, user, params)
-	return ..()
+/obj/item/gun/ballistic/automatic/m90/afterattack_secondary(atom/target, mob/living/user, proximity_flag, click_parameters)
+	underbarrel.afterattack(target, user, proximity_flag, click_parameters)
+	return SECONDARY_ATTACK_CONTINUE_CHAIN
 
-/obj/item/gun/ballistic/automatic/m90/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(isammocasing(tool))
-		if(istype(tool, underbarrel.magazine.ammo_type))
+/obj/item/gun/ballistic/automatic/m90/attackby(obj/item/A, mob/user, params)
+	if(isammocasing(A))
+		if(istype(A, underbarrel.magazine.ammo_type))
 			underbarrel.attack_self(user)
-			underbarrel.attackby(tool, user, list2params(modifiers))
-		return ITEM_INTERACT_BLOCKING
-	return ..()
+			underbarrel.attackby(A, user, params)
+	else
+		..()
 
 /obj/item/gun/ballistic/automatic/tommygun
 	name = "\improper Thompson SMG"
@@ -277,15 +276,15 @@
 	. += "l6_door_[cover_open ? "open" : "closed"]"
 
 
-/obj/item/gun/ballistic/automatic/l6_saw/try_fire_gun(atom/target, mob/living/user, params)
+/obj/item/gun/ballistic/automatic/l6_saw/afterattack(atom/target as mob|obj|turf, mob/living/user as mob|obj, flag, params)
+	. |= AFTERATTACK_PROCESSED_ITEM
+
 	if(cover_open)
 		balloon_alert(user, "close the cover!")
-		return FALSE
-
-	. = ..()
-	if(.)
+		return
+	else
+		. |= ..()
 		update_appearance()
-	return .
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
 /obj/item/gun/ballistic/automatic/l6_saw/attack_hand(mob/user, list/modifiers)

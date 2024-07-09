@@ -213,9 +213,9 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 	spans |= speech_span
 
-	var/datum/language/spoken_lang = GLOB.language_datum_instances[language]
-	if(LAZYLEN(spoken_lang?.spans))
-		spans |= spoken_lang.spans
+	if(language)
+		var/datum/language/L = GLOB.language_datum_instances[language]
+		spans |= L.spans
 
 	if(message_mods[MODE_SING])
 		var/randomnote = pick("\u2669", "\u266A", "\u266B")
@@ -464,12 +464,11 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		message = unintelligize(message)
 
 	tts_filter = list()
-	var/list/data = list(message, tts_message, tts_filter, capitalize_message)
+	var/list/data = list(message, tts_message, tts_filter)
 	SEND_SIGNAL(src, COMSIG_LIVING_TREAT_MESSAGE, data)
 	message = data[TREAT_MESSAGE_ARG]
 	tts_message = data[TREAT_TTS_MESSAGE_ARG]
 	tts_filter = data[TREAT_TTS_FILTER_ARG]
-	capitalize_message = data[TREAT_CAPITALIZE_MESSAGE]
 
 	if(!tts_message)
 		tts_message = message

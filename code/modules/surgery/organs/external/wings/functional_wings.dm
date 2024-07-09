@@ -149,13 +149,13 @@
 		return SSaccessories.wings_open_list
 	else
 		return SSaccessories.wings_list
-	*/ // SKYRAT EDIT REMOVAL END
-	// SKYRAT EDIT ADDITION START
+	*/ // ORIGINAL END - SKYRAT EDIT START - CUSTOMIZATION - TODO: Add support for wings_open
 	if(wings_open)
 		return SSaccessories.sprite_accessories["wings_open"]
 
 	return SSaccessories.sprite_accessories["wings"]
-	// SKYRAT EDIT ADDITION END
+	// SKYRAT EDIT END
+
 ///Update our wingsprite to the open wings variant
 /datum/bodypart_overlay/mutant/wings/functional/proc/open_wings()
 	wings_open = TRUE

@@ -1,5 +1,5 @@
 /datum/armament_entry/company_import/kahraman
-	category = COMPANY_NAME_KAHRAMAN_INDUSTRIES
+	category = KAHRAMAN_INDUSTRIES_NAME
 	company_bitflag = CARGO_COMPANY_KAHRAMAN
 
 /// Kahraman-made machines

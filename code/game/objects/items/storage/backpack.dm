@@ -32,6 +32,10 @@
  * Backpack Types
  */
 
+/obj/item/storage/backpack/old/Initialize(mapload)
+	. = ..()
+	atom_storage.max_total_storage = 12
+
 /obj/item/bag_of_holding_inert
 	name = "inert bag of holding"
 	desc = "What is currently a just an unwieldly block of metal with a slot ready to accept a bluespace anomaly core."
@@ -47,8 +51,9 @@
 
 /obj/item/bag_of_holding_inert/Initialize(mapload)
 	. = ..()
-	var/static/list/recipes = list(/datum/crafting_recipe/boh)
-	AddElement(/datum/element/slapcrafting, recipes)
+	AddComponent(/datum/component/slapcrafting,\
+		slapcraft_recipes = list(/datum/crafting_recipe/boh)\
+	)
 
 /obj/item/storage/backpack/holding
 	name = "bag of holding"

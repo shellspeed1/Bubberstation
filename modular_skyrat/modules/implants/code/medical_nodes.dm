@@ -1,6 +1,8 @@
-/datum/techweb_node/cyber/cyber_implants/New()
-	design_ids += list(
+/datum/techweb_node/cyber_implants
+	design_ids = list(
+		"ci-nutriment",
 		"ci-scanner",
+		"ci-breather",
 		"ci-gloweyes",
 		"ci-welding",
 		"ci-medhud",
@@ -11,27 +13,13 @@
 		"ci-lighter",
 		"ci-razor",
 	)
-	// thrusters in combat_implants
-	design_ids -= list(
-		"ci-thrusters",
-	)
-	return ..()
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 5000)
 
-/datum/techweb_node/cyber/combat_implants/New()
-	design_ids += list(
-		"ci-mantis",
-		"ci-flash",
-		"ci-thrusters",
-		"ci-antisleep",
-	)
-	return ..()
+/datum/techweb_node/adv_cyber_implants
+	design_ids = list("ci-nv", "ci-nutrimentplus", "ci-surgery", "ci-toolset")
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 7500)
 
-/datum/techweb_node/cyber/night_vision_implants
-	id = TECHWEB_NODE_NIGHT_VISION_IMPLANTS
-	display_name = "Night vision implants"
-	description = "Now you can work all night, even if you lost your glasses!"
-	prereq_ids = list(TECHWEB_NODE_NIGHT_VISION, TECHWEB_NODE_CYBER_IMPLANTS)
-	design_ids = list(
-		"ci-nv",
-	)
-	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_1_POINTS)
+/datum/techweb_node/combat_cyber_implants
+	design_ids = list("ci-antidrop", "ci-antistun", "ci-antisleep", "ci-thrusters", "ci-mantis", "ci-flash", "ci-reviver")
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 12000)
+

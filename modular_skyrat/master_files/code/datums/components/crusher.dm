@@ -35,13 +35,10 @@
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_update_overlays))
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
-
 	RegisterSignal(parent, COMSIG_ITEM_ATTACK, PROC_REF(on_attack))
-	RegisterSignal(parent, COMSIG_ITEM_ATTACK_SECONDARY, PROC_REF(on_attack_secondary))
 	RegisterSignal(parent, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_afterattack))
-	RegisterSignal(parent, COMSIG_ITEM_INTERACTING_WITH_ATOM, PROC_REF(on_interact))
-	RegisterSignal(parent, COMSIG_ITEM_INTERACTING_WITH_ATOM_SECONDARY, PROC_REF(on_interact_secondary))
-	RegisterSignal(parent, COMSIG_RANGED_ITEM_INTERACTING_WITH_ATOM_SECONDARY, PROC_REF(on_interact_secondary))
+	RegisterSignal(parent, COMSIG_ITEM_ATTACK_SECONDARY, PROC_REF(on_attack_secondary))
+	RegisterSignal(parent, COMSIG_ITEM_AFTERATTACK_SECONDARY, PROC_REF(on_afterattack_secondary))
 
 /datum/component/kinetic_crusher/Destroy(force)
 	QDEL_LIST(stored_trophies) //dont be a dummy
@@ -119,18 +116,21 @@
 	for(var/obj/item/crusher_trophy/trophy as anything in stored_trophies)
 		trophy.on_melee_hit(target, user)
 
-
-/datum/component/kinetic_crusher/proc/on_attack_secondary(obj/item/source, mob/living/victim, mob/living/user, params)
+/datum/component/kinetic_crusher/proc/on_afterattack(obj/item/source, mob/living/target, mob/living/user, proximity_flag, click_parameters)
 	SIGNAL_HANDLER
 
-	var/cancel_attack = NONE
-	if(attack_check && !attack_check.Invoke(user, &cancel_attack))
-		return cancel_attack
+	if(!proximity_flag)
+		return
 
-	return COMPONENT_SECONDARY_CONTINUE_ATTACK_CHAIN
+	if(istype(target, /obj/item/crusher_trophy))
+		var/obj/item/crusher_trophy/trophy = target
+		trophy.add_to(parent, user, src)
 
-/datum/component/kinetic_crusher/proc/on_afterattack(obj/item/source, mob/living/target, mob/living/user, click_parameters)
-	SIGNAL_HANDLER
+		if(istype(parent, /obj/item/clothing/gloves/kinetic_gauntlets))
+			var/obj/item/clothing/gloves/kinetic_gauntlets/gauntlets = parent //CODE DEBT CODE DEBT WOOOOO
+			gauntlets.left_gauntlet?.force = gauntlets.force * 5
+			gauntlets.right_gauntlet?.force = gauntlets.force * 5
+		return
 
 	if(!isliving(target))
 		return
@@ -166,27 +166,23 @@
 	SEND_SIGNAL(user, COMSIG_LIVING_CRUSHER_DETONATE, target, parent, backstabbed)
 	target.apply_damage(dealt_damage, BRUTE, blocked = target.getarmor(type = BOMB))
 
-
-/datum/component/kinetic_crusher/proc/on_interact(obj/item/source, mob/living/user, atom/target, modifiers)
+/datum/component/kinetic_crusher/proc/on_attack_secondary(obj/item/source, mob/living/victim, mob/living/user, params)
 	SIGNAL_HANDLER
 
-	if(!istype(target, /obj/item/crusher_trophy))
-		return
+	var/cancel_attack = NONE
+	if(attack_check && !attack_check.Invoke(user, &cancel_attack))
+		return cancel_attack
 
-	. = ITEM_INTERACT_SUCCESS
-	var/obj/item/crusher_trophy/trophy = target
-	trophy.add_to(parent, user, src)
+	return COMPONENT_SECONDARY_CONTINUE_ATTACK_CHAIN
 
-	if(istype(parent, /obj/item/clothing/gloves/kinetic_gauntlets))
-		var/obj/item/clothing/gloves/kinetic_gauntlets/gauntlets = parent //CODE DEBT CODE DEBT WOOOOO
-		gauntlets.left_gauntlet?.force = gauntlets.force * 5
-		gauntlets.right_gauntlet?.force = gauntlets.force * 5
-
-/datum/component/kinetic_crusher/proc/on_interact_secondary(obj/item/source, mob/living/user, atom/target, list/modifiers)
+/datum/component/kinetic_crusher/proc/on_afterattack_secondary(obj/item/source, atom/target, mob/living/user, proximity_flag, click_parameters)
 	SIGNAL_HANDLER
 
 	var/_ = TRUE
 	if(attack_check && _ /*unused var error*/&& !attack_check.Invoke(user, &_))
+		return
+
+	if(!ismob(target) && proximity_flag)
 		return
 
 	if(!charged)
@@ -200,7 +196,7 @@
 	for(var/obj/item/crusher_trophy/attached_trophy as anything in stored_trophies)
 		attached_trophy.on_projectile_fire(destabilizer, user)
 
-	destabilizer.preparePixelProjectile(target, user, modifiers)
+	destabilizer.preparePixelProjectile(target, user, params2list(click_parameters))
 	destabilizer.hammer_synced = src
 	destabilizer.firer = user
 
@@ -212,9 +208,7 @@
 	charged = FALSE
 	crusher.update_appearance()
 	addtimer(CALLBACK(src, PROC_REF(recharge_shot)), recharge_speed)
-	return ITEM_INTERACT_SUCCESS
-
-
+	return COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN
 
 /datum/component/kinetic_crusher/proc/recharge_shot()
 	var/obj/item/crusher = parent

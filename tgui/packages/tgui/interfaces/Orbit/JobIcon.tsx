@@ -37,15 +37,20 @@ export function JobIcon(props: Props) {
   return (
     <div className="JobIcon">
       {icon === 'borg' ? (
-        <Icon color="lightblue" name={JOB2ICON[job]} ml={0.3} mt={0.4} />
+        <Icon color="lightblue" name={JOB2ICON[job]} mr={0.5} />
       ) : (
-        <DmIcon
-          icon={iconSettings.dmi}
-          icon_state={icon}
+        <div
           style={{
-            transform: iconSettings.transform,
+            height: '17px',
+            width: '18px',
           }}
-        />
+        >
+          <DmIcon
+            icon={iconSettings.dmi}
+            icon_state={icon}
+            style={{ transform: iconSettings.transform }}
+          />
+        </div>
       )}
     </div>
   );

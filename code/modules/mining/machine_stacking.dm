@@ -12,29 +12,23 @@
 
 /obj/machinery/mineral/stacking_unit_console/Initialize(mapload)
 	. = ..()
-	var/area/our_area = get_area(src)
-	if(!isnull(our_area))
-		return
-	var/list/turf_list = our_area.get_turfs_by_zlevel(z)
-	if(!islist(turf_list))
-		return
-	for (var/turf/area_turf as anything in turf_list)
-		var/obj/machinery/mineral/stacking_machine/found_machine = locate(/obj/machinery/mineral/stacking_machine) in area_turf
-		if(!isnull(found_machine) && isnull(found_machine.console))
-			found_machine.console = src
-			machine = found_machine
-			break
+	machine = locate(/obj/machinery/mineral/stacking_machine) in view(2, src)
+	if (machine)
+		machine.console = src
 
 /obj/machinery/mineral/stacking_unit_console/Destroy()
-	if(!isnull(machine))
+	if(machine)
 		machine.console = null
 		machine = null
 	return ..()
 
-/obj/machinery/mineral/stacking_unit_console/multitool_act(mob/living/user, obj/item/multitool/M)
+/obj/machinery/mineral/stacking_unit_console/multitool_act(mob/living/user, obj/item/I)
+	if(!multitool_check_buffer(user, I))
+		return
+	var/obj/item/multitool/M = I
 	M.set_buffer(src)
 	balloon_alert(user, "saved to multitool buffer")
-	return ITEM_INTERACT_SUCCESS
+	return TRUE
 
 /obj/machinery/mineral/stacking_unit_console/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -115,7 +109,7 @@
 	)
 
 /obj/machinery/mineral/stacking_machine/Destroy()
-	if(!isnull(console))
+	if(console)
 		console.machine = null
 		console = null
 	materials = null

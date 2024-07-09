@@ -70,7 +70,7 @@
 	category = OPFOR_EQUIPMENT_CATEGORY_MODSUIT_MODULES
 
 /datum/opposing_force_equipment/modsuit_modules/ion_advanced
-	item_type = /obj/item/mod/module/jetpack
+	item_type = /obj/item/mod/module/jetpack/advanced
 
 /datum/opposing_force_equipment/modsuit_modules/storage_syndicate
 	item_type = /obj/item/mod/module/storage/syndicate

@@ -12,6 +12,7 @@
 	spread = 6
 	pin = /obj/item/firing_pin/implant/mindshield
 	can_suppress = FALSE
+	can_bayonet = FALSE
 	mag_display = TRUE
 	mag_display_ammo = FALSE
 	accepted_magazine_type = /obj/item/ammo_box/magazine/m44a
@@ -50,7 +51,7 @@
 	name = ".300 caseless bullet"
 	damage = 13
 	armour_penetration = 30 //gonna actually kill the brit that made this var require a U in armor
-	embed_data = null
+	embedding = null
 	shrapnel_type = null
 
 /obj/item/gun/ballistic/automatic/ar/modular/m44a/scoped
@@ -93,9 +94,9 @@
 	QDEL_NULL(underbarrel)
 	return ..()
 
-/obj/item/gun/ballistic/automatic/ar/modular/m44a/shotgun/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
-	underbarrel.item_interaction(user, tool, modifiers)
-	return ITEM_INTERACT_SUCCESS
+/obj/item/gun/ballistic/automatic/ar/modular/m44a/shotgun/afterattack_secondary(atom/target, mob/living/user, flag, params)
+	underbarrel.afterattack(target, user, flag, params)
+	return SECONDARY_ATTACK_CONTINUE_CHAIN
 
 /obj/item/gun/ballistic/automatic/ar/modular/m44a/shotgun/attackby(obj/item/attacking_item, mob/user, params)
 	if(!istype(attacking_item, /obj/item/ammo_casing))
@@ -121,9 +122,9 @@
 	QDEL_NULL(underbarrel)
 	return ..()
 
-/obj/item/gun/ballistic/automatic/ar/modular/m44a/grenadelauncher/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
-	underbarrel.interact_with_atom(interacting_with, user, modifiers)
-	return ITEM_INTERACT_SUCCESS
+/obj/item/gun/ballistic/automatic/ar/modular/m44a/grenadelauncher/afterattack_secondary(atom/target, mob/living/user, flag, params)
+	underbarrel.afterattack(target, user, flag, params)
+	return SECONDARY_ATTACK_CONTINUE_CHAIN
 
 /obj/item/gun/ballistic/automatic/ar/modular/m44a/grenadelauncher/attackby(obj/item/attacking_item, mob/user, params)
 	if(!istype(attacking_item, /obj/item/ammo_casing))

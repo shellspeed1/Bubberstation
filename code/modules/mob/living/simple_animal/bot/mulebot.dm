@@ -27,6 +27,7 @@
 	mob_size = MOB_SIZE_LARGE
 	buckle_prevents_pull = TRUE // No pulling loaded shit
 	bot_mode_flags = ~BOT_MODE_ROUNDSTART_POSSESSION
+
 	req_one_access = list(ACCESS_ROBOTICS, ACCESS_CARGO)
 	radio_key = /obj/item/encryptionkey/headset_cargo
 	radio_channel = RADIO_CHANNEL_SUPPLY
@@ -52,7 +53,7 @@
 	var/auto_pickup = TRUE /// true if auto-pickup at beacon
 	var/report_delivery = TRUE /// true if bot will announce an arrival to a location.
 
-	var/obj/item/stock_parts/power_store/cell /// Internal Powercell
+	var/obj/item/stock_parts/cell/cell /// Internal Powercell
 	var/cell_move_power_usage = 1///How much power we use when we move.
 	var/num_steps = 0 ///The amount of steps we should take until we rest for a time.
 
@@ -78,7 +79,7 @@
 	access_card.add_access(cargo_trim.access + cargo_trim.wildcard_access)
 	prev_access = access_card.access.Copy()
 
-	cell = new /obj/item/stock_parts/power_store/cell/upgraded(src, 2000)
+	cell = new /obj/item/stock_parts/cell/upgraded(src, 2000)
 
 	AddElement(/datum/element/ridable, /datum/component/riding/creature/mulebot)
 	diag_hud_set_mulebotcell()
@@ -181,7 +182,7 @@
 	return ITEM_INTERACT_SUCCESS
 
 /mob/living/simple_animal/bot/mulebot/attackby(obj/item/I, mob/living/user, params)
-	if(istype(I, /obj/item/stock_parts/power_store/cell) && bot_cover_flags & BOT_COVER_MAINTS_OPEN)
+	if(istype(I, /obj/item/stock_parts/cell) && bot_cover_flags & BOT_COVER_MAINTS_OPEN)
 		if(cell)
 			to_chat(user, span_warning("[src] already has a power cell!"))
 			return TRUE
@@ -377,14 +378,20 @@
 
 // mousedrop a crate to load the bot
 // can load anything if hacked
-/mob/living/simple_animal/bot/mulebot/mouse_drop_receive(atom/movable/AM, mob/user, params)
-	if(!isliving(user))
+/mob/living/simple_animal/bot/mulebot/MouseDrop_T(atom/movable/AM, mob/user)
+	var/mob/living/L = user
+
+	if (!istype(L))
+		return
+
+	if(user.incapacitated() || (istype(L) && L.body_position == LYING_DOWN))
 		return
 
 	if(!istype(AM) || isdead(AM) || iscameramob(AM) || istype(AM, /obj/effect/dummy/phased_mob))
 		return
 
 	load(AM)
+
 
 // called to load a crate
 /mob/living/simple_animal/bot/mulebot/proc/load(atom/movable/AM)
@@ -486,8 +493,7 @@
 	. = ..()
 	if(has_gravity())
 		for(var/mob/living/carbon/human/future_pancake in loc)
-			if(future_pancake.body_position == LYING_DOWN)
-				run_over(future_pancake)
+			run_over(future_pancake)
 
 	diag_hud_set_mulebotcell()
 
@@ -638,7 +644,7 @@
 
 		if(load) // if loaded, unload at target
 			if(report_delivery)
-				speak("Destination [RUNECHAT_BOLD("[destination]")] reached. Unloading [load].",radio_channel)
+				speak("Destination <b>[destination]</b> reached. Unloading [load].",radio_channel)
 			unload(loaddir)
 		else
 			// not loaded
@@ -654,7 +660,7 @@
 				if(AM?.Adjacent(src))
 					load(AM)
 					if(report_delivery)
-						speak("Now loading [load] at [RUNECHAT_BOLD("[get_area_name(src)]")].", radio_channel)
+						speak("Now loading [load] at <b>[get_area_name(src)]</b>.", radio_channel)
 		// whatever happened, check to see if we return home
 
 		if(auto_return && home_destination && destination != home_destination)
@@ -806,7 +812,8 @@
 	icon_state = "paranormalmulebot0"
 	base_icon = "paranormalmulebot"
 
-/mob/living/simple_animal/bot/mulebot/paranormal/mouse_drop_receive(atom/movable/AM, mob/user, params)
+
+/mob/living/simple_animal/bot/mulebot/paranormal/MouseDrop_T(atom/movable/AM, mob/user)
 	var/mob/living/L = user
 
 	if(user.incapacitated() || (istype(L) && L.body_position == LYING_DOWN))

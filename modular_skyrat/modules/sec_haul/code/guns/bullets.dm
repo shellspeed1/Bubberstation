@@ -33,17 +33,7 @@
 	name = "9x25mm IHDF bullet"
 	damage = 30
 	damage_type = STAMINA
-	embed_type = /datum/embed_data/c9mm_ihdf
-
-/datum/embed_data/c9mm_ihdf
-	embed_chance = 0
-	fall_chance = 3
-	jostle_chance = 4
-	pain_mult = 5
-	pain_stam_pct = 0.4
-	ignore_throwspeed_threshold = TRUE
-	jostle_pain_mult = 6
-	rip_time = 1 SECONDS
+	embedding = list(embed_chance=0, fall_chance=3, jostle_chance=4, ignore_throwspeed_threshold=TRUE, pain_stam_pct=0.4, pain_mult=5, jostle_pain_mult=6, rip_time=10)
 
 /obj/item/ammo_casing/c9mm/rubber
 	name = "9x25mm Mk.12 rubber casing"
@@ -62,7 +52,7 @@
 	ricochet_decay_damage = 0.8
 	shrapnel_type = null
 	sharpness = NONE
-	embed_type = null
+	embedding = null
 
 /*
 *	10mm Auto
@@ -100,7 +90,7 @@
 	ricochet_decay_damage = 0.8
 	shrapnel_type = null
 	sharpness = NONE
-	embed_type = null
+	embedding = null
 
 /obj/item/ammo_casing/c10mm/ihdf
 	name = "10mm IHDF bullet casing"
@@ -112,14 +102,4 @@
 	name = "10mm IHDF bullet"
 	damage = 40
 	damage_type = STAMINA
-	embed_type = /datum/embed_data/c10mm_ihdf
-
-/datum/embed_data/c10mm_ihdf
-	embed_chance = 0
-	fall_chance = 3
-	jostle_chance = 4
-	ignore_throwspeed_threshold = TRUE
-	pain_stam_pct = 0.4
-	pain_mult = 5
-	jostle_pain_mult = 6
-	rip_time = 1 SECONDS
+	embedding = list(embed_chance=0, fall_chance=3, jostle_chance=4, ignore_throwspeed_threshold=TRUE, pain_stam_pct=0.4, pain_mult=5, jostle_pain_mult=6, rip_time=10)

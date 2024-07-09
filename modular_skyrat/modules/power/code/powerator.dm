@@ -32,13 +32,13 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE | DEPARTMENT_BITFLAG_CARGO | DEPARTMENT_BITFLAG_ENGINEERING
 
 /datum/techweb_node/powerator
-	id = TECHWEB_NODE_POWERATOR
+	id = "powerator"
 	display_name = "Powerator"
 	description = "We've been saved by it in the past, we should send some power ourselves!"
-	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_3_POINTS)
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 10000)
 	hidden = TRUE
 	experimental = TRUE
-	prereq_ids = list(TECHWEB_NODE_PARTS_ADV)
+	prereq_ids = list("base")
 	design_ids = list(
 		"powerator",
 	)

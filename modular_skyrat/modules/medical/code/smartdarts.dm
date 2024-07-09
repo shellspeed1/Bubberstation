@@ -9,36 +9,35 @@
 	base_icon_state = "dart"
 
 //Code that handles the base interactions involving smartdarts
-/obj/item/reagent_containers/syringe/smartdart/interact_with_atom(atom/target, mob/living/user, list/modifiers)
+/obj/item/reagent_containers/syringe/smartdart/afterattack(atom/target, mob/user, proximity)
 	if(isliving(target))
 		to_chat(user, span_warning("The [src] is unable to manually inject chemicals."))
 	return
-
 //A majority of this code is from the original syringes.dm file.
-/obj/item/reagent_containers/syringe/smartdart/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
-	if(!try_syringe(interacting_with, user))
-		return ITEM_INTERACT_BLOCKING
+/obj/item/reagent_containers/syringe/smartdart/afterattack_secondary(atom/target, mob/user, proximity_flag, click_parameters)
+	if(!try_syringe(target, user, proximity_flag))
+		return SECONDARY_ATTACK_CONTINUE_CHAIN
 
 	if(reagents.total_volume >= reagents.maximum_volume)
 		to_chat(user, span_notice("[src] is full."))
-		return ITEM_INTERACT_BLOCKING
+		return SECONDARY_ATTACK_CONTINUE_CHAIN
 
-	if(isliving(interacting_with))
+	if(isliving(target))
 		to_chat(user, span_warning("The [src] is unable to take blood."))
-		return ITEM_INTERACT_BLOCKING
+		return SECONDARY_ATTACK_CONTINUE_CHAIN
 
-	if(!interacting_with.reagents.total_volume)
-		to_chat(user, span_warning("[interacting_with] is empty!"))
-		return ITEM_INTERACT_BLOCKING
+	if(!target.reagents.total_volume)
+		to_chat(user, span_warning("[target] is empty!"))
+		return SECONDARY_ATTACK_CONTINUE_CHAIN
 
-	if(!interacting_with.is_drawable(user))
-		to_chat(user, span_warning("You cannot directly remove reagents from [interacting_with]!"))
-		return ITEM_INTERACT_BLOCKING
+	if(!target.is_drawable(user))
+		to_chat(user, span_warning("You cannot directly remove reagents from [target]!"))
+		return SECONDARY_ATTACK_CONTINUE_CHAIN
 
-	var/trans = interacting_with.reagents.trans_to(src, amount_per_transfer_from_this, transferred_by = user) // transfer from, transfer to - who cares?
+	var/trans = target.reagents.trans_to(src, amount_per_transfer_from_this, transferred_by = user) // transfer from, transfer to - who cares?
 	to_chat(user, span_notice("You fill [src] with [trans] units of the solution. It now contains [reagents.total_volume] units."))
 
-	return ITEM_INTERACT_SUCCESS
+	return SECONDARY_ATTACK_CONTINUE_CHAIN
 
 //The base smartdartgun
 /obj/item/gun/syringe/smartdart

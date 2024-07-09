@@ -112,7 +112,9 @@
 /area/shuttle/escape)
 "vG" = (
 /obj/structure/bed/double,
-/obj/structure/curtain/cloth,
+/obj/structure/curtain/cloth{
+	layer = 3.8
+	},
 /obj/item/bedsheet/hos/double,
 /turf/open/floor/carpet,
 /area/shuttle/escape)

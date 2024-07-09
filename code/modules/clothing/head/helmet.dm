@@ -4,7 +4,6 @@
 	icon = 'icons/obj/clothing/head/helmet.dmi'
 	worn_icon = 'icons/mob/clothing/head/helmet.dmi'
 	icon_state = "helmet"
-	base_icon_state = "helmet"
 	inhand_icon_state = "helmet"
 	armor_type = /datum/armor/head_helmet
 	cold_protection = HEAD
@@ -32,7 +31,6 @@
 	AddElement(/datum/element/update_icon_updates_onmob)
 
 /obj/item/clothing/head/helmet/sec
-	var/flipped_visor = FALSE
 
 /obj/item/clothing/head/helmet/sec/Initialize(mapload)
 	. = ..()
@@ -61,19 +59,6 @@
 		return TRUE
 
 	return ..()
-
-/obj/item/clothing/head/helmet/sec/click_alt(mob/user)
-	flipped_visor = !flipped_visor
-	balloon_alert(user, "visor flipped")
-	// base_icon_state is modified for seclight attachment component
-	base_icon_state = "[initial(base_icon_state)][flipped_visor ? "-novisor" : ""]"
-	icon_state = base_icon_state
-	if (flipped_visor)
-		flags_cover &= ~HEADCOVERSEYES
-	else
-		flags_cover |= HEADCOVERSEYES
-	update_appearance()
-	return CLICK_ACTION_SUCCESS
 
 /obj/item/clothing/head/helmet/alt
 	name = "bulletproof helmet"
@@ -410,7 +395,6 @@
 	armor_type = /datum/armor/helmet_knight
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDESNOUT
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
-	resistance_flags = NONE
 	strip_delay = 80
 	dog_fashion = null
 	clothing_traits = list(TRAIT_HEAD_INJURY_BLOCKED)
@@ -527,9 +511,8 @@
 	desc = "A cheaply made kettle helmet with an added faceplate to protect your eyes and mouth."
 	icon_state = "military"
 	inhand_icon_state = "knight_helmet"
-	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE|HIDESNOUT
+	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDESNOUT
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH | PEPPERPROOF
-	flash_protect = FLASH_PROTECTION_FLASH
 	strip_delay = 80
 	dog_fashion = null
 	armor_type = /datum/armor/helmet_military
@@ -556,7 +539,6 @@
 	armor_type = /datum/armor/helmet_warlord
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE|HIDEMASK|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH | PEPPERPROOF
-	flash_protect = FLASH_PROTECTION_FLASH
 	slowdown = 0.2
 
 /datum/armor/helmet_warlord

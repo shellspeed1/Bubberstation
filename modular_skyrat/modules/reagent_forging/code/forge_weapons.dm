@@ -72,7 +72,6 @@
 	worn_icon_state = "dagger_back"
 	belt_icon_state = "dagger_belt"
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	embed_type = /datum/embed_data/forged_dagger
 	throwforce = 10
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_SMALL
@@ -80,11 +79,6 @@
 	attack_verb_continuous = list("attacks", "slashes", "stabs", "slices", "tears", "lacerates", "rips", "dices", "cuts")
 	attack_verb_simple = list("attack", "slash", "stab", "slice", "tear", "lacerate", "rip", "dice", "cut")
 	sharpness = SHARP_EDGED
-
-/datum/embed_data/forged_dagger
-	embed_chance = 50
-	fall_chance = 1
-	pain_mult = 2
 
 /obj/item/forging/reagent_weapon/dagger/Initialize(mapload)
 	. = ..()
@@ -122,7 +116,6 @@
 	inhand_icon_state = "spear"
 	worn_icon_state = "spear_back"
 	throwforce = 15 //not a javelin, throwing specialty is for the axe.
-	embed_data = /datum/embed_data/forged_spear
 	slot_flags = ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FIRE_PROOF
@@ -132,11 +125,6 @@
 	wound_bonus = -15
 	bare_wound_bonus = 15
 	sharpness = SHARP_POINTY
-
-/datum/embed_data/forged_spear
-	embed_chance = 75
-	fall_chance = 0
-	pain_mult = 6
 
 /obj/item/forging/reagent_weapon/spear/Initialize(mapload)
 	. = ..()
@@ -156,18 +144,13 @@
 	worn_icon_state = "axe_back"
 	throwforce = 22 //ouch
 	throw_speed = 4
-	embed_type = /datum/embed_data/forged_axe
+	embedding = list("impact_pain_mult" = 2, "remove_pain_mult" = 4, "jostle_chance" = 2.5)
 	slot_flags = ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FIRE_PROOF
 	attack_verb_continuous = list("slashes", "bashes")
 	attack_verb_simple = list("slash", "bash")
 	sharpness = SHARP_EDGED
-
-/datum/embed_data/forged_axe
-	embed_chance = 65
-	fall_chance = 10
-	pain_mult = 4
 
 /obj/item/forging/reagent_weapon/axe/Initialize(mapload)
 	. = ..()

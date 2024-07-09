@@ -23,6 +23,4 @@
 		/obj/item/scalpel/alien,
 		/obj/item/circular_saw/alien,
 		/obj/item/surgical_processor,
-		/obj/item/bonesetter/alien,
-		/obj/item/blood_filter/alien,
 	)

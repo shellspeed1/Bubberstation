@@ -348,12 +348,47 @@
 /obj/item/ammo_casing/spent,
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/infested_frigate)
+"er" = (
+/obj/structure/lattice,
+/obj/structure/alien/resin/membrane{
+	max_integrity = 1600;
+	desc = "Resin just thin enough to let light pass through, but it's congealing in the same way as the thicker stuff.";
+	name = "viscous resin membrane"
+	},
+/obj/item/ammo_casing/spent,
+/obj/item/ammo_casing/spent,
+/obj/item/ammo_casing/spent,
+/obj/item/ammo_casing/spent,
+/obj/structure/door_assembly/door_assembly_hatch{
+	anchored = 1;
+	name = "crew quarters";
+	desc = "People lived in this place.";
+	layer = 2.8
+	},
+/turf/template_noop,
+/area/ruin/space/has_grav/infested_frigate)
 "eE" = (
 /mob/living/basic/alien{
 	faction = list("syndicate","xenomorph")
 	},
 /obj/structure/cable,
 /turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/infested_frigate)
+"eX" = (
+/obj/structure/table/glass,
+/obj/item/pen{
+	pixel_x = 6;
+	pixel_y = 6
+	},
+/obj/item/phone{
+	layer = 3.1
+	},
+/obj/item/paper/crumpled/muddy/fluff/elephant_graveyard/rnd_notes{
+	default_raw_text = "<b>STERILIZATION ORDERS</b> <BR><BR><i>Detailed findings:</i><BR><BR>A biological research lab within the HD-10180 system has suffered from a complete containment failure. The SYN-C Brutus is to deliver a nuclear payload via strike team. Everything inside and outside the facility is to be killed on sight, including any research staff. Nuclear authentication codes have been sent via red phone, as have other detailed orders.<BR><BR><b>The rest of the documents are maps and mundane information regarding the crew's destination.</b>";
+	name = "STERILIZATION ORDERS";
+	desc = "These are particularly boring for what they entail."
+	},
+/turf/open/floor/pod/dark,
 /area/ruin/space/has_grav/infested_frigate)
 "eZ" = (
 /obj/item/clothing/mask/facehugger/impregnated,
@@ -384,6 +419,27 @@
 	},
 /obj/item/ammo_casing/spent,
 /turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/infested_frigate)
+"ff" = (
+/obj/structure/sign/poster/contraband/random/directional/north,
+/obj/item/restraints/handcuffs/cable/zipties/used,
+/obj/effect/decal/cleanable/blood{
+	icon_state = "floor7-old"
+	},
+/obj/effect/decal/cleanable/glass,
+/obj/effect/decal/cleanable/blood/gibs{
+	icon_state = "gib1-old"
+	},
+/obj/machinery/door/window/left/directional/east{
+	layer = 3.2
+	},
+/obj/machinery/door/poddoor/shutters/window/preopen{
+	id = "captivity"
+	},
+/mob/living/carbon/alien/larva{
+	faction = list("syndicate","xenomorph")
+	},
+/turf/open/floor/plating,
 /area/ruin/space/has_grav/infested_frigate)
 "fl" = (
 /turf/template_noop,
@@ -602,6 +658,27 @@
 	},
 /turf/open/floor/mineral/plastitanium/airless,
 /area/ruin/space/has_grav/infested_frigate)
+"jx" = (
+/obj/effect/decal/cleanable/glass{
+	layer = 3.1
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+/turf/open/floor/mineral/plastitanium/red,
+/area/ruin/space/has_grav/infested_frigate)
+"jy" = (
+/obj/effect/turf_decal{
+	icon_state = "warningline_white"
+	},
+/obj/structure/showcase/machinery/tv{
+	icon_state = "computer_broken";
+	desc = "It would have been locked anyway.";
+	name = "syndicate navigation console"
+	},
+/obj/effect/decal/cleanable/glass{
+	layer = 3.1
+	},
+/turf/open/floor/pod/dark,
+/area/ruin/space/has_grav/infested_frigate)
 "kc" = (
 /obj/effect/turf_decal{
 	dir = 8
@@ -679,10 +756,6 @@
 	faction = list("syndicate","xenomorph")
 	},
 /turf/closed/wall/mineral/plastitanium,
-/area/ruin/space/has_grav/infested_frigate)
-"lp" = (
-/obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
-/turf/open/floor/plating,
 /area/ruin/space/has_grav/infested_frigate)
 "lx" = (
 /obj/structure/barricade/security,
@@ -790,13 +863,6 @@
 	},
 /turf/open/floor/pod/dark,
 /area/ruin/space/has_grav/infested_frigate)
-"no" = (
-/obj/machinery/door/poddoor{
-	id = "Brutusexterior"
-	},
-/obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
-/turf/open/floor/plating,
-/area/ruin/space/has_grav/infested_frigate)
 "nG" = (
 /mob/living/basic/alien{
 	faction = list("syndicate","xenomorph")
@@ -810,6 +876,19 @@
 	desc = "The resin is thick and it keeps collapsing on itself."
 	},
 /turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/infested_frigate)
+"nU" = (
+/obj/structure/cable,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/blood{
+	icon_state = "floor5-old"
+	},
+/obj/item/ammo_casing/spent{
+	layer = 3.1
+	},
+/obj/item/gun/ballistic/automatic/plastikov,
+/obj/effect/mob_spawn/corpse/human/syndicatepilot,
+/turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/infested_frigate)
 "oj" = (
 /obj/structure/fans/tiny,
@@ -897,20 +976,6 @@
 	},
 /turf/template_noop,
 /area/template_noop)
-"ps" = (
-/obj/structure/table/glass,
-/obj/item/pen{
-	pixel_x = 6;
-	pixel_y = 6
-	},
-/obj/item/phone,
-/obj/item/paper/crumpled/muddy/fluff/elephant_graveyard/rnd_notes{
-	default_raw_text = "<b>STERILIZATION ORDERS</b> <BR><BR><i>Detailed findings:</i><BR><BR>A biological research lab within the HD-10180 system has suffered from a complete containment failure. The SYN-C Brutus is to deliver a nuclear payload via strike team. Everything inside and outside the facility is to be killed on sight, including any research staff. Nuclear authentication codes have been sent via red phone, as have other detailed orders.<BR><BR><b>The rest of the documents are maps and mundane information regarding the crew's destination.</b>";
-	name = "STERILIZATION ORDERS";
-	desc = "These are particularly boring for what they entail."
-	},
-/turf/open/floor/pod/dark,
-/area/ruin/space/has_grav/infested_frigate)
 "qb" = (
 /obj/effect/turf_decal{
 	dir = 8
@@ -929,6 +994,18 @@
 	plasmatanks = 0
 	},
 /turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/infested_frigate)
+"qu" = (
+/obj/effect/decal/cleanable/blood{
+	icon_state = "floor7-old"
+	},
+/obj/effect/decal/cleanable/glass,
+/obj/machinery/button/door/directional/north{
+	name = "prisoner isolation shutter";
+	id = "captivity";
+	layer = 3.4
+	},
+/turf/open/floor/pod/dark,
 /area/ruin/space/has_grav/infested_frigate)
 "qC" = (
 /obj/effect/turf_decal/tile/bar{
@@ -1072,25 +1149,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/infested_frigate)
-"sy" = (
-/obj/structure/sign/poster/contraband/random/directional/north,
-/obj/item/restraints/handcuffs/cable/zipties/used,
-/obj/effect/decal/cleanable/blood{
-	icon_state = "floor7-old"
-	},
-/obj/effect/decal/cleanable/glass,
-/obj/effect/decal/cleanable/blood/gibs{
-	icon_state = "gib1-old"
-	},
-/obj/machinery/door/window/left/directional/east,
-/obj/machinery/door/poddoor/shutters/window/preopen{
-	id = "captivity"
-	},
-/mob/living/carbon/alien/larva{
-	faction = list("syndicate","xenomorph")
-	},
-/turf/open/floor/plating,
-/area/ruin/space/has_grav/infested_frigate)
 "sA" = (
 /obj/item/clothing/mask/surgical,
 /obj/structure/cable,
@@ -1198,6 +1256,16 @@
 	faction = list("syndicate","xenomorph")
 	},
 /turf/open/floor/pod/dark,
+/area/ruin/space/has_grav/infested_frigate)
+"vj" = (
+/obj/machinery/door/poddoor{
+	id = "Brutusexterior";
+	closingLayer = 2.65
+	},
+/obj/effect/spawner/structure/window/reinforced/plasma/plastitanium{
+	layer = 2.9
+	},
+/turf/open/floor/plating,
 /area/ruin/space/has_grav/infested_frigate)
 "vm" = (
 /obj/machinery/door/airlock/external/ruin,
@@ -1565,24 +1633,6 @@
 	},
 /turf/open/floor/pod/dark,
 /area/ruin/space/has_grav/infested_frigate)
-"yL" = (
-/obj/structure/lattice,
-/obj/structure/alien/resin/membrane{
-	max_integrity = 1600;
-	desc = "Resin just thin enough to let light pass through, but it's congealing in the same way as the thicker stuff.";
-	name = "viscous resin membrane"
-	},
-/obj/item/ammo_casing/spent,
-/obj/item/ammo_casing/spent,
-/obj/item/ammo_casing/spent,
-/obj/item/ammo_casing/spent,
-/obj/structure/door_assembly/door_assembly_hatch{
-	anchored = 1;
-	name = "crew quarters";
-	desc = "People lived in this place."
-	},
-/turf/template_noop,
-/area/ruin/space/has_grav/infested_frigate)
 "yP" = (
 /obj/item/storage/belt/military,
 /obj/effect/decal/cleanable/glass{
@@ -1595,6 +1645,12 @@
 /obj/item/ammo_casing/spent,
 /obj/effect/decal/cleanable/plastic,
 /turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/infested_frigate)
+"yZ" = (
+/obj/effect/spawner/structure/window/reinforced/plasma/plastitanium{
+	layer = 2.9
+	},
+/turf/open/floor/plating,
 /area/ruin/space/has_grav/infested_frigate)
 "zg" = (
 /obj/effect/turf_decal/tile/bar{
@@ -1790,11 +1846,6 @@
 /obj/item/clothing/shoes/combat,
 /turf/open/floor/pod/dark,
 /area/ruin/space/has_grav/infested_frigate)
-"Cx" = (
-/obj/effect/decal/cleanable/glass,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
-/turf/open/floor/mineral/plastitanium/red,
-/area/ruin/space/has_grav/infested_frigate)
 "CE" = (
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/mineral/plastitanium,
@@ -1865,18 +1916,6 @@
 /obj/structure/girder/displaced,
 /turf/template_noop,
 /area/template_noop)
-"ED" = (
-/obj/effect/turf_decal{
-	icon_state = "warningline_white"
-	},
-/obj/structure/showcase/machinery/tv{
-	icon_state = "computer_broken";
-	desc = "It would have been locked anyway.";
-	name = "syndicate navigation console"
-	},
-/obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod/dark,
-/area/ruin/space/has_grav/infested_frigate)
 "EL" = (
 /obj/effect/turf_decal{
 	icon_state = "warningline_white"
@@ -1941,7 +1980,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/infested_frigate)
 "Fs" = (
-/mob/living/basic/bot/firebot{
+/mob/living/simple_animal/bot/firebot{
 	faction = list("syndicate","xenomorph");
 	name = "Mr. Squirtsky";
 	desc = "He seems much happier with the new management!"
@@ -2039,17 +2078,6 @@
 	faction = list("syndicate","xenomorph")
 	},
 /turf/open/floor/mineral/plastitanium,
-/area/ruin/space/has_grav/infested_frigate)
-"Hv" = (
-/obj/structure/cable,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/blood{
-	icon_state = "floor5-old"
-	},
-/obj/item/ammo_casing/spent,
-/obj/item/gun/ballistic/automatic/plastikov,
-/obj/effect/mob_spawn/corpse/human/syndicatepilot,
-/turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/infested_frigate)
 "Hx" = (
 /obj/structure/alien/weeds,
@@ -2338,17 +2366,6 @@
 /obj/item/ammo_casing/spent,
 /obj/item/ammo_casing/spent,
 /turf/open/floor/mineral/plastitanium,
-/area/ruin/space/has_grav/infested_frigate)
-"LS" = (
-/obj/effect/decal/cleanable/blood{
-	icon_state = "floor7-old"
-	},
-/obj/effect/decal/cleanable/glass,
-/obj/machinery/button/door/directional/north{
-	name = "prisoner isolation shutter";
-	id = "captivity"
-	},
-/turf/open/floor/pod/dark,
 /area/ruin/space/has_grav/infested_frigate)
 "Ml" = (
 /obj/effect/turf_decal/tile/bar{
@@ -3371,7 +3388,7 @@ fl
 fl
 fl
 wP
-sy
+ff
 wP
 hX
 SM
@@ -3398,7 +3415,7 @@ fl
 fl
 fl
 wP
-LS
+qu
 wP
 Ru
 df
@@ -3461,7 +3478,7 @@ rs
 AH
 yt
 YW
-no
+vj
 fl
 fl
 fl
@@ -3478,7 +3495,7 @@ fl
 fl
 fl
 fl
-no
+vj
 yJ
 wP
 wP
@@ -3488,7 +3505,7 @@ Qg
 ki
 Zp
 di
-no
+vj
 fl
 fl
 fl
@@ -3505,7 +3522,7 @@ fl
 fl
 fl
 fl
-no
+vj
 OC
 OC
 qE
@@ -3515,7 +3532,7 @@ wP
 Et
 KA
 RG
-no
+vj
 fl
 fl
 fl
@@ -3532,7 +3549,7 @@ fl
 fl
 fl
 fl
-no
+vj
 xp
 ab
 Cm
@@ -3542,7 +3559,7 @@ Rw
 SX
 xT
 qC
-no
+vj
 fl
 fl
 fl
@@ -3559,7 +3576,7 @@ fl
 fl
 fl
 fl
-no
+vj
 Ez
 Jx
 Cm
@@ -3569,7 +3586,7 @@ Qg
 Ml
 hB
 xB
-no
+vj
 fl
 fl
 fl
@@ -3722,7 +3739,7 @@ fl
 Eg
 fl
 Qj
-yL
+er
 Qm
 wP
 NU
@@ -3775,7 +3792,7 @@ fl
 fl
 fl
 fl
-no
+vj
 EL
 yP
 Fg
@@ -3785,7 +3802,7 @@ mk
 Jx
 lU
 Rx
-no
+vj
 fl
 fl
 fl
@@ -3802,7 +3819,7 @@ fl
 fl
 fl
 HD
-no
+vj
 ug
 Nu
 CE
@@ -3812,7 +3829,7 @@ Fs
 Im
 iy
 IC
-no
+vj
 fl
 fl
 fl
@@ -3829,7 +3846,7 @@ fl
 fl
 fl
 fl
-no
+vj
 YV
 Er
 wP
@@ -3839,7 +3856,7 @@ LF
 wP
 iL
 nm
-no
+vj
 fl
 fl
 fl
@@ -3861,7 +3878,7 @@ bM
 Ne
 wP
 bE
-Hv
+nU
 ML
 wP
 UX
@@ -4019,7 +4036,7 @@ fl
 fl
 fl
 fl
-no
+vj
 Bw
 ip
 BA
@@ -4027,7 +4044,7 @@ sZ
 rz
 Ai
 KC
-no
+vj
 fl
 fl
 fl
@@ -4046,7 +4063,7 @@ fl
 fl
 fl
 fl
-no
+vj
 HA
 Cm
 Td
@@ -4054,7 +4071,7 @@ st
 MH
 eE
 AM
-no
+vj
 fl
 fl
 fl
@@ -4073,7 +4090,7 @@ fl
 fl
 fl
 fl
-no
+vj
 vM
 wP
 wP
@@ -4081,7 +4098,7 @@ VV
 wP
 wP
 OK
-no
+vj
 fl
 fl
 fl
@@ -4100,15 +4117,15 @@ fl
 fl
 fl
 fl
-no
+vj
 cX
 wP
-ED
+jy
 PV
 Gt
 wP
 OK
-no
+vj
 fl
 fl
 fl
@@ -4127,7 +4144,7 @@ fl
 fl
 fl
 fl
-no
+vj
 iS
 wP
 Jp
@@ -4135,7 +4152,7 @@ xo
 wO
 wP
 oV
-no
+vj
 fl
 fl
 fl
@@ -4154,15 +4171,15 @@ fl
 fl
 fl
 fl
-no
+vj
 KK
 wP
-ps
+eX
 aA
 NX
 wP
 oo
-no
+vj
 fl
 fl
 fl
@@ -4183,11 +4200,11 @@ fl
 fl
 wP
 af
-lp
-lp
+yZ
+yZ
 pl
-lp
-lp
+yZ
+yZ
 sE
 wP
 fl
@@ -4239,7 +4256,7 @@ wP
 Yd
 hA
 My
-Cx
+jx
 yG
 nG
 UV

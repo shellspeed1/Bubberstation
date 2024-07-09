@@ -1,7 +1,3 @@
-/datum/record
-	/// Chronological age of the character.
-	var/chrono_age
-
 /datum/record/crew
 	/// Contains their background information.
 	var/background_information

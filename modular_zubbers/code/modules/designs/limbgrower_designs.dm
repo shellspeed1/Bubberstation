@@ -74,10 +74,3 @@
 /obj/item/disk/design_disk/limbs/tajaran
 	name = "Tajaran Organ Design Disk"
 	limb_designs = list(/obj/item/organ/internal/tongue/cat/tajaran, /obj/item/organ/internal/eyes/tajaran, /obj/item/organ/internal/ears/cat/tajaran)
-
-/obj/machinery/limbgrower/Initialize(mapload)
-	categories += list(
-		SPECIES_HEMOPHAGE,
-		SPECIES_TAJARAN
-	)
-	. = ..()

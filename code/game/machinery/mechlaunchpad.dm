@@ -30,14 +30,15 @@
 	if(default_deconstruction_crowbar(tool))
 		return TRUE
 
-/obj/machinery/mechpad/multitool_act(mob/living/user, obj/item/multitool/multitool)
-	. = NONE
+/obj/machinery/mechpad/multitool_act(mob/living/user, obj/item/tool)
 	if(!panel_open)
 		return
-
+	if(!multitool_check_buffer(user, tool))
+		return
+	var/obj/item/multitool/multitool = tool
 	multitool.set_buffer(src)
 	balloon_alert(user, "saved to multitool buffer")
-	return ITEM_INTERACT_SUCCESS
+	return TRUE
 
 /obj/machinery/mechpad/wirecutter_act(mob/living/user, obj/item/tool)
 	if(!panel_open)
