@@ -274,7 +274,7 @@ export const PersonalCrafting = (props) => {
                       (mode === MODE.cooking ? ' recipes...' : ' designs...')
                     }
                     value={searchText}
-                    onChange={(value) => {
+                    onInput={(e, value) => {
                       setPages(1);
                       setSearchText(value);
                     }}
@@ -553,7 +553,7 @@ export const PersonalCrafting = (props) => {
               )}
               {recipes.length > displayLimit && (
                 <Section
-                  mb={1}
+                  mb={2}
                   textAlign="center"
                   style={{ cursor: 'pointer' }}
                   onClick={() => setPages(pages + 1)}

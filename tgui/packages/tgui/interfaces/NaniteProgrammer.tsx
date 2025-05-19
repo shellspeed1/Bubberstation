@@ -23,7 +23,7 @@ interface ExtraSetting {
   type: string;
 }
 
-export const NaniteCodes = () => {
+export const NaniteCodes = (props, context) => {
   const { act, data } = useBackend<NaniteProgram>();
   const { activation_code, deactivation_code, kill_code, trigger_code } = data;
   return (
@@ -96,7 +96,7 @@ export const NaniteCodes = () => {
   );
 };
 
-export const NaniteDelays = () => {
+export const NaniteDelays = (props, context) => {
   const { act, data } = useBackend<NaniteProgram>();
 
   const { timer_restart, timer_shutdown, timer_trigger, timer_trigger_delay } =
@@ -174,7 +174,7 @@ export const NaniteDelays = () => {
   );
 };
 
-export const NaniteExtraEntry = (props) => {
+export const NaniteExtraEntry = (props, context) => {
   const { extra_setting } = props;
   const { name, type } = extra_setting;
   const typeComponentMap = {
@@ -188,7 +188,7 @@ export const NaniteExtraEntry = (props) => {
   );
 };
 
-export const NaniteExtraNumber = (props) => {
+export const NaniteExtraNumber = (props, context) => {
   const { extra_setting } = props;
   const { act } = useBackend<NaniteProgram>();
   const { name, value, min, max, unit } = extra_setting;
@@ -210,7 +210,7 @@ export const NaniteExtraNumber = (props) => {
   );
 };
 
-export const NaniteExtraText = (props) => {
+export const NaniteExtraText = (props, context) => {
   const { extra_setting } = props;
   const { act } = useBackend();
   const { name, value }: ExtraSetting = extra_setting;
@@ -218,7 +218,7 @@ export const NaniteExtraText = (props) => {
     <Input
       value={value}
       width="200px"
-      onChange={(val) =>
+      onInput={(e, val) =>
         act('set_extra_setting', {
           target_setting: name,
           value: val,
@@ -228,7 +228,7 @@ export const NaniteExtraText = (props) => {
   );
 };
 
-export const NaniteExtraType = (props) => {
+export const NaniteExtraType = (props, context) => {
   const { extra_setting } = props;
   const { act } = useBackend();
   const { name, value, types }: ExtraSetting = extra_setting;
@@ -255,7 +255,7 @@ interface ExtraSettingBoolean {
   value: boolean;
 }
 
-export const NaniteExtraBoolean = (props) => {
+export const NaniteExtraBoolean = (props, context) => {
   const { extra_setting } = props;
   const { act } = useBackend();
   const { name, value, true_text, false_text }: ExtraSettingBoolean =
@@ -274,7 +274,7 @@ export const NaniteExtraBoolean = (props) => {
   );
 };
 
-export const NaniteProgrammer = () => {
+export const NaniteProgrammer = (props, context) => {
   return (
     <Window width={420} height={550}>
       <Window.Content scrollable>
@@ -298,7 +298,7 @@ interface NaniteProgrammerContentProps {
   extra_settings: ExtraSetting[];
 }
 
-export const NaniteProgrammerContent = () => {
+export const NaniteProgrammerContent = (props, context) => {
   const { act, data } = useBackend<NaniteProgrammerContentProps>();
   const {
     has_disk,

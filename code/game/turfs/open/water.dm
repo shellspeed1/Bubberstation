@@ -23,8 +23,6 @@
 	var/immerse_overlay_color = "#5AAA88"
 	///The transparency of the immerse element's overlay
 	var/immerse_overlay_alpha = 180
-	///Icon state to use for the immersion mask
-	var/immerse_overlay = "immerse"
 
 	/// Fishing element for this specific water tile
 	var/datum/fish_source/fishing_datum = /datum/fish_source/river
@@ -44,7 +42,14 @@
 /turf/open/water/proc/on_atom_inited(datum/source, atom/movable/movable)
 	SIGNAL_HANDLER
 	UnregisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON)
-	make_immersed(movable)
+	if(immerse_added || is_type_in_typecache(movable, GLOB.immerse_ignored_movable))
+		return
+	AddElement(/datum/element/immerse, icon, icon_state, "immerse", immerse_overlay_color, alpha = immerse_overlay_alpha)
+	immerse_added = TRUE
+
+/turf/open/water/Destroy()
+	UnregisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON)
+	return ..()
 
 /**
  * turf/Initialize() calls Entered on its contents too, however
@@ -53,39 +58,16 @@
  */
 /turf/open/water/Entered(atom/movable/arrived)
 	. = ..()
-	make_immersed(arrived)
-
-///Makes this turf immersable, return true if we actually did anything so child procs don't have to repeat our checks
-/turf/open/water/proc/make_immersed(atom/movable/triggering_atom)
-	if(immerse_added || is_type_in_typecache(triggering_atom, GLOB.immerse_ignored_movable))
-		return FALSE
-	AddElement(/datum/element/immerse, icon, icon_state, immerse_overlay, immerse_overlay_color, alpha = immerse_overlay_alpha)
+	if(immerse_added || is_type_in_typecache(arrived, GLOB.immerse_ignored_movable))
+		return
+	AddElement(/datum/element/immerse, icon, icon_state, "immerse", immerse_overlay_color, alpha = immerse_overlay_alpha)
 	immerse_added = TRUE
-	return TRUE
-
-/turf/open/water/Destroy()
-	UnregisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON)
-	return ..()
-
 
 /turf/open/water/jungle
 
 /turf/open/water/no_planet_atmos
 	baseturfs = /turf/open/water/no_planet_atmos
 	planetary_atmos = FALSE
-
-/turf/open/water/no_planet_atmos/deep
-	name = "deep water"
-	desc = "Less shallow water."
-	icon_state = "deep_riverwater_motion"
-	immerse_overlay = "immerse_deep"
-	baseturfs = /turf/open/water/no_planet_atmos/deep
-
-/turf/open/water/no_planet_atmos/deep/make_immersed()
-	. = ..()
-	if (!.)
-		return
-	AddElement(/datum/element/swimming_tile)
 
 /turf/open/water/beach
 	planetary_atmos = FALSE
@@ -101,24 +83,6 @@
 /turf/open/water/beach/Initialize(mapload)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_MESSAGE_IN_A_BOTTLE_LOCATION, INNATE_TRAIT)
-
-/// Deep water drains stamina and starts drowning you
-/turf/open/water/deep_beach
-	name = "deep water"
-	desc = "Don't forget your life jacket."
-	immerse_overlay = "immerse_deep"
-	icon = 'icons/turf/beach.dmi'
-	icon_state = "deepwater"
-	base_icon_state = "deepwater"
-	baseturfs = /turf/open/water/deep_beach
-	immerse_overlay_color = "#57707c"
-	fishing_datum = /datum/fish_source/ocean
-
-/turf/open/water/deep_beach/make_immersed()
-	. = ..()
-	if (!.)
-		return
-	AddElement(/datum/element/swimming_tile)
 
 /turf/open/water/lavaland_atmos
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
@@ -145,6 +109,8 @@
 	immerse_overlay_color = "#A0E2DE"
 	immerse_overlay_alpha = 190
 	fishing_datum = /datum/fish_source/hot_spring
+	/// Holder for the steam particles
+	var/obj/effect/abstract/particle_holder/cached/particle_effect
 
 /turf/open/water/hot_spring/Initialize(mapload)
 	. = ..()
@@ -156,18 +122,18 @@
 		AddElement(/datum/element/immerse, icon, icon_state, "immerse", immerse_overlay_color, alpha = immerse_overlay_alpha)
 		immerse_added = TRUE
 	icon_state = "pool_[rand(1, 4)]"
-	var/obj/effect/abstract/shared_particle_holder/holder = add_shared_particles(/particles/hotspring_steam, "hot_springs_[GET_TURF_PLANE_OFFSET(src)]", pool_size = 4)
-	// Render the steam over mobs and objects on the game plane
-	holder.vis_flags &= ~VIS_INHERIT_PLANE
-	// And be unaffected by ambient occlusions, which would render the steam grey
-	holder.plane = MUTATE_PLANE(MASSIVE_OBJ_PLANE, src)
+	particle_effect = new(src, /particles/hotspring_steam, 4)
+	//render the steam over mobs and objects on the game plane
+	particle_effect.vis_flags &= ~VIS_INHERIT_PLANE
+	//And be unaffected by ambient occlusions, which would render the steam grey
+	particle_effect.plane = MUTATE_PLANE(MASSIVE_OBJ_PLANE, src)
 	add_filter("hot_spring_waves", 1, wave_filter(y = 1, size = 1, offset = 0, flags = WAVE_BOUNDED))
 	var/filter = get_filter("hot_spring_waves")
 	animate(filter, offset = 1, time = 3 SECONDS, loop = -1, easing = SINE_EASING|EASE_IN|EASE_OUT)
 	animate(offset = 0, time = 3 SECONDS, easing = SINE_EASING|EASE_IN|EASE_OUT)
 
 /turf/open/water/hot_spring/Destroy()
-	remove_shared_particles("hot_springs_[GET_TURF_PLANE_OFFSET(src)]")
+	QDEL_NULL(particle_effect)
 	remove_filter("hot_spring_waves")
 	for(var/atom/movable/movable as anything in contents)
 		exit_hot_spring(movable)

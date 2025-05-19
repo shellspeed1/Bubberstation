@@ -30,7 +30,7 @@ import './styles/themes/clockwork.scss'; // SKYRAT EDIT ADDITION
 import { perf } from 'common/perf';
 import { setupGlobalEvents } from 'tgui-core/events';
 import { setupHotKeys } from 'tgui-core/hotkeys';
-import { setupHotReloading } from 'tgui-dev-server/link/client.mjs';
+import { setupHotReloading } from 'tgui-dev-server/link/client.cjs';
 
 import { App } from './App';
 import { setGlobalStore } from './backend';
@@ -62,14 +62,11 @@ function setupApp() {
   Byond.subscribe((type, payload) => store.dispatch({ type, payload }));
 
   // Enable hot module reloading
-  if (import.meta.webpackHot) {
+  if (module.hot) {
     setupHotReloading();
-    import.meta.webpackHot.accept(
-      ['./debug', './layouts', './routes', './App'],
-      () => {
-        render(<App />);
-      },
-    );
+    module.hot.accept(['./debug', './layouts', './routes', './App'], () => {
+      render(<App />);
+    });
   }
 }
 

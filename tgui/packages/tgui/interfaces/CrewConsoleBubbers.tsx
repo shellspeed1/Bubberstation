@@ -192,7 +192,12 @@ const CrewTable = () => {
               name={sortAsc ? 'chevron-up' : 'chevron-down'}
             />
           </Button>
-          <Input placeholder="Search for name..." onChange={setSearchQuery} />
+          <Input
+            placeholder="Search for name..."
+            onInput={(e) =>
+              setSearchQuery((e.target as HTMLTextAreaElement).value)
+            }
+          />
         </>
       }
     >

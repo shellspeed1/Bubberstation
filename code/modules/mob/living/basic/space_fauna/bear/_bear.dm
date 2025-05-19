@@ -7,14 +7,13 @@
 	icon_dead = "bear_dead"
 	icon_gib = "bear_gib"
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
-	butcher_results = list(/obj/item/food/meat/slab/bear = 5, /obj/item/stack/sheet/animalhide/bear = 2)
+	butcher_results = list(/obj/item/food/meat/slab/bear = 5, /obj/item/clothing/head/costume/bearpelt = 1)
 
 	response_help_continuous = "pets"
 	response_help_simple = "pet"
 	response_disarm_continuous = "gently pushes aside"
 	response_disarm_simple = "gently push aside"
 
-	max_stamina = 120
 	maxHealth = 60
 	health = 60
 	speed = 0
@@ -32,7 +31,7 @@
 	friendly_verb_continuous = "bear hugs"
 	friendly_verb_simple = "bear hug"
 
-	faction = list(FACTION_RUSSIAN, FACTION_BEAR)
+	faction = list(FACTION_RUSSIAN)
 
 	habitable_atmos = null
 	minimum_survivable_temperature = TCMB
@@ -43,7 +42,7 @@
 
 /mob/living/basic/bear/Initialize(mapload)
 	. = ..()
-	add_traits(list(TRAIT_SPACEWALK, TRAIT_SWIMMER, TRAIT_FENCE_CLIMBER, TRAIT_SNOWSTORM_IMMUNE), INNATE_TRAIT)
+	add_traits(list(TRAIT_SPACEWALK, TRAIT_FENCE_CLIMBER, TRAIT_SNOWSTORM_IMMUNE), INNATE_TRAIT)
 	AddElement(/datum/element/ai_retaliate)
 	AddComponent(/datum/component/tree_climber, climbing_distance = 15)
 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_BEAR, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)
@@ -89,7 +88,7 @@
 	maxHealth = 250
 	health = 250
 	faction = list(FACTION_NEUTRAL)
-	status_flags = CANPUSH | CANSTUN
+	status_flags = CANPUSH
 
 /mob/living/basic/bear/snow/ancient
 	name = "ancient polar bear"

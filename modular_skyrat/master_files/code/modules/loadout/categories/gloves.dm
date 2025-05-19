@@ -60,6 +60,7 @@
 /datum/loadout_item/gloves/yellow
 	name = "Yellow Gloves"
 	item_path = /obj/item/clothing/gloves/color/ffyellow
+	additional_displayed_text = list("NON-INSULATING")
 
 /datum/loadout_item/gloves/white
 	name = "White Gloves"

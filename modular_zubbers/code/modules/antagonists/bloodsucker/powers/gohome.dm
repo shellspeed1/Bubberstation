@@ -112,7 +112,7 @@
 	user.uncuff()
 	if(drop_item)
 		for(var/obj/item/literally_everything in owner)
-			owner.dropItemToGround(literally_everything)
+			owner.dropItemToGround(literally_everything, TRUE)
 
 	playsound(current_turf, 'sound/effects/magic/summon_karp.ogg', 60, 1)
 

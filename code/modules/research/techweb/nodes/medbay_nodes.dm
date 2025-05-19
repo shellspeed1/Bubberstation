@@ -29,7 +29,6 @@
 		"dropper",
 		"pillbottle",
 		"xlarge_beaker",
-		"jerrycan",
 	)
 	experiments_to_unlock = list(
 		/datum/experiment/autopsy/human,

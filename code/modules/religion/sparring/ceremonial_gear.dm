@@ -46,7 +46,7 @@
 	)
 	RegisterSignal(src, COMSIG_ITEM_SHARPEN_ACT, PROC_REF(block_sharpening))
 
-/obj/item/ceremonial_blade/melee_attack_chain(mob/user, atom/target, list/modifiers)
+/obj/item/ceremonial_blade/melee_attack_chain(mob/user, atom/target, params)
 	if(!HAS_TRAIT(target, TRAIT_SPARRING))
 		return ..()
 	var/old_force = force

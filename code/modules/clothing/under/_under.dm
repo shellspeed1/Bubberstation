@@ -108,11 +108,9 @@
 	if(isinhands)
 		return
 	if(GET_ATOM_BLOOD_DNA_LENGTH(src))
-		var/mutable_appearance/blood_overlay = mutable_appearance('icons/effects/blood.dmi', "uniformblood")
-		blood_overlay.color = get_blood_dna_color(GET_ATOM_BLOOD_DNA(src))
-		. += blood_overlay
+		. += mutable_appearance('icons/effects/blood.dmi', "uniformblood")
 
-/obj/item/clothing/under/attackby(obj/item/attacking_item, mob/user, list/modifiers)
+/obj/item/clothing/under/attackby(obj/item/attacking_item, mob/user, params)
 	if(repair_sensors(attacking_item, user))
 		return TRUE
 

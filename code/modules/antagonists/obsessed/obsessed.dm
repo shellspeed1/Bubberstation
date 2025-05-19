@@ -64,9 +64,7 @@
 	victim_dummy.set_hairstyle("Messy", update = TRUE)
 
 	var/icon/obsessed_icon = render_preview_outfit(preview_outfit)
-	var/icon/blood_icon = icon('icons/effects/blood.dmi', "uniformblood")
-	blood_icon.Blend(BLOOD_COLOR_RED, ICON_MULTIPLY)
-	obsessed_icon.Blend(blood_icon, ICON_OVERLAY)
+	obsessed_icon.Blend(icon('icons/effects/blood.dmi', "uniformblood"), ICON_OVERLAY)
 
 	var/icon/final_icon = finish_preview_icon(obsessed_icon)
 

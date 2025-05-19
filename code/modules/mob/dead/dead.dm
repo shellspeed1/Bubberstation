@@ -29,7 +29,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 /mob/dead/canUseStorage()
 	return FALSE
 
-/mob/dead/get_status_tab_items() // BUBBER ADDITION START - /tg/ removed this in #90572, but we still use a custom lobby screen
+/mob/dead/get_status_tab_items()
 	. = ..()
 	if(SSticker.HasRoundStarted())
 		return
@@ -42,9 +42,10 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 		. += "Time To Start: SOON"
 
 	. += "Players: [LAZYLEN(GLOB.clients)]"
-	. += "Players Ready: [SSticker.totalPlayersReady]"
+	. += "Players Ready: [SSticker.totalPlayersReady]" //Bubberstation edit
 	if(client.holder)
-		. += "Admins Ready: [SSticker.total_admins_ready] / [length(GLOB.admins)]" // BUBBER ADDITION END - /tg/ removed this in #90572, but we still use a custom lobby screen
+		// . += "Players Ready: [SSticker.totalPlayersReady]" Bubberstation edit
+		. += "Admins Ready: [SSticker.total_admins_ready] / [length(GLOB.admins)]"
 
 #define SERVER_HOPPER_TRAIT "server_hopper"
 

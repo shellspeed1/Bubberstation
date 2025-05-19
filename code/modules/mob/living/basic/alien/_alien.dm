@@ -18,7 +18,6 @@
 	bubble_icon = "alien"
 	combat_mode = TRUE
 	faction = list(ROLE_ALIEN)
-	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, STAMINA = 0, OXY = 1)
 
 	// Going for a dark purple here
 	lighting_cutoff_red = 30
@@ -86,10 +85,3 @@
 		return
 	visible_message(span_alertalien("[src] lays an egg!"))
 	new /obj/structure/alien/egg(loc)
-
-/mob/living/basic/alien/spawn_gibs(drop_bitflags=NONE)
-	if(drop_bitflags & DROP_BODYPARTS)
-		new /obj/effect/gibspawner/xeno(drop_location(), src)
-	else
-		new /obj/effect/gibspawner/xeno/bodypartless(drop_location(), src)
-

@@ -378,11 +378,11 @@
 	use(user, going_up = FALSE)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/structure/ladder/attackby(obj/item/item, mob/user, list/modifiers)
+/obj/structure/ladder/attackby(obj/item/item, mob/user, params)
 	use(user)
 	return TRUE
 
-/obj/structure/ladder/attackby_secondary(obj/item/item, mob/user, list/modifiers)
+/obj/structure/ladder/attackby_secondary(obj/item/item, mob/user, params)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

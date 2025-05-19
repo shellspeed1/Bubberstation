@@ -66,8 +66,6 @@ export const Window = (props: Props) => {
     setIsReadyToRender(true);
   }, []);
 
-  const { scale } = config.window;
-
   useEffect(() => {
     if (!suspended && isReadyToRender) {
       const updateGeometry = () => {
@@ -99,7 +97,7 @@ export const Window = (props: Props) => {
         logger.log('unmounting');
       };
     }
-  }, [isReadyToRender, width, height, scale]);
+  }, [isReadyToRender, width, height]);
 
   const dispatch = globalStore.dispatch;
   const fancy = config.window?.fancy;

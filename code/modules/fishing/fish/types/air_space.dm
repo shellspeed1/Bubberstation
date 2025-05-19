@@ -115,7 +115,7 @@
 	return MANUAL_SUICIDE
 
 /obj/item/fish/starfish/proc/ascension(mob/living/user)
-	user.apply_status_effect(/datum/status_effect/go_away/deletes_mob)
+	user.apply_status_effect(/datum/status_effect/go_away/deluxe)
 	qdel(src)
 
 /obj/item/fish/baby_carp

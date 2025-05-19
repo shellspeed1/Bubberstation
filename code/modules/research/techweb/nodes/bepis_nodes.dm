@@ -21,7 +21,6 @@
 	design_ids = list(
 		"mauna_mug",
 		"rolling_table",
-		"plasticducky",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_1_POINTS)
 	hidden = TRUE

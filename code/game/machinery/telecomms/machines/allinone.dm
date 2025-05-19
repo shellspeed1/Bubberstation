@@ -45,6 +45,6 @@
 		sleep(signal.data["slow"]) // simulate the network lag if necessary
 	signal.broadcast()
 
-/obj/machinery/telecomms/allinone/attackby(obj/item/attacking_item, mob/user, list/modifiers)
+/obj/machinery/telecomms/allinone/attackby(obj/item/attacking_item, mob/user, params)
 	if(attacking_item.tool_behaviour == TOOL_MULTITOOL)
 		return attack_hand(user)

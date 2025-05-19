@@ -269,12 +269,7 @@
 				balloon_alert(user, "unanchor first!")
 				return ITEM_INTERACT_BLOCKING
 			if(do_after(user, 2 SECONDS, target = interacting_with))
-				var/design_cost = designs[machine_target.type]
-				var/to_return = min(design_cost, max_matter - matter) // Give back matter was used to create smth
-				if(to_return < design_cost)
-					balloon_alert(user, "storage full!")
-				matter += to_return
-				machine_target.deconstruct()
+				machine_target.deconstruct() //Let's not substract matter
 				playsound(src, 'sound/machines/click.ogg', 50, TRUE) //this is just such a great sound effect
 			return ITEM_INTERACT_SUCCESS
 

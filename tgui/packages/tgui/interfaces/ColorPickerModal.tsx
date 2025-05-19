@@ -20,7 +20,6 @@ import {
   Box,
   Button,
   Flex,
-  Input,
   NumberInput,
   Section,
   Stack,
@@ -222,7 +221,7 @@ const ColorSelector: React.FC<ColorSelectorProps> = React.memo(
                   <Stack.Item>
                     <Box textColor="label">Hex:</Box>
                   </Stack.Item>
-                  <Stack.Item grow>
+                  <Stack.Item grow height="24px">
                     <HexColorInput
                       fluid
                       color={hsvaToHex(color).substring(1)}
@@ -460,8 +459,9 @@ const HexColorInput: React.FC<HexColorInputProps> = React.memo(
       [alpha],
     );
 
-    const handleChangeEvent = (value: string) => {
-      const strippedValue = value
+    const handleChangeEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const inputValue = e.currentTarget.value;
+      const strippedValue = inputValue
         .replace(/[^0-9A-Fa-f]/g, '')
         .substring(0, 6)
         .toUpperCase();
@@ -481,7 +481,7 @@ const HexColorInput: React.FC<HexColorInputProps> = React.memo(
       }
     }, [initialColor, isValidFullHex, localValue, onChange]);
 
-    const handleBlur = () => {
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
       commitOrRevert();
     };
 
@@ -493,14 +493,18 @@ const HexColorInput: React.FC<HexColorInputProps> = React.memo(
     };
 
     return (
-      <Input
-        fluid
-        value={localValue}
-        onChange={handleChangeEvent}
-        onBlur={handleBlur}
-        onKeyDown={handleKeyDown}
-        {...rest}
-      />
+      <Box className={classes(['Input', fluid && 'Input--fluid'])}>
+        <div className="Input__baseline">.</div>
+        <input
+          className="Input__input"
+          value={localValue}
+          spellCheck={false}
+          onChange={handleChangeEvent}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          {...rest}
+        />
+      </Box>
     );
   },
 );

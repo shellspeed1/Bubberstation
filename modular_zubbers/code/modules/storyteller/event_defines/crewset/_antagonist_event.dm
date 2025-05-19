@@ -34,8 +34,7 @@
 
 	/// Restricted roles from the antag roll
 	var/restricted_roles = list(JOB_AI, JOB_CYBORG)
-	/// Restricted species from the antag roll
-	var/restricted_species = list()
+
 	/// How many baseline antags do we spawn
 	var/base_antags = 1
 	/// How many maximum antags can we spawn
@@ -82,7 +81,7 @@
 
 /datum/round_event_control/antagonist/proc/get_candidates()
 	var/round_started = SSticker.HasRoundStarted()
-	var/list/candidates = SSgamemode.get_candidates(antag_flag, pick_roundstart_players = !round_started, restricted_roles = restricted_roles, restricted_species = restricted_species)
+	var/list/candidates = SSgamemode.get_candidates(antag_flag, pick_roundstart_players = !round_started, restricted_roles = restricted_roles)
 	return candidates
 
 /datum/round_event_control/antagonist/solo

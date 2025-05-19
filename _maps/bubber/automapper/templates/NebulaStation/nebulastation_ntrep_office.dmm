@@ -144,7 +144,7 @@
 /turf/template_noop,
 /area/template_noop)
 "z" = (
-/obj/machinery/photocopier/prebuilt,
+/obj/machinery/photocopier,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/nt_rep)
 "A" = (

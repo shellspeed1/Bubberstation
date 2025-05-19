@@ -75,14 +75,13 @@ export const SelectEquipment = (props) => {
                   autoFocus
                   placeholder="Search"
                   value={searchText}
-                  onChange={setSearchText}
-                  expensive
+                  onInput={(e, value) => setSearchText(value)}
                 />
               </Stack.Item>
               <Stack.Item>
                 <DisplayTabs categories={categories} />
               </Stack.Item>
-              <Stack.Item grow={1} basis={0}>
+              <Stack.Item mt={0} grow={1} basis={0}>
                 <OutfitDisplay entries={visibleOutfits} currentTab={tab} />
               </Stack.Item>
             </Stack>

@@ -16,18 +16,12 @@ function escapeRegex(string) {
 }
 
 export async function removeGuideComments({ github, context }) {
-  const originalBody = (await github.rest.pulls.get({
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    pull_number: context.payload.pull_request.number,
-  })).data.body;
+  let newBody = context.payload.pull_request.body;
 
-  if (!originalBody) {
+  if (!newBody) {
 	console.log("PR body is empty, skipping...");
 	return;
   }
-
-  let newBody = originalBody;
 
   for (const comment of comments) {
     newBody = newBody.replace(
@@ -36,7 +30,7 @@ export async function removeGuideComments({ github, context }) {
     );
   }
 
-  if (newBody !== originalBody) {
+  if (newBody !== context.payload.pull_request.body) {
     await github.rest.pulls.update({
       pull_number: context.payload.pull_request.number,
       repo: context.repo.repo,

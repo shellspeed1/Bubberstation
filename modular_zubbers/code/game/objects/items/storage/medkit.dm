@@ -5,8 +5,10 @@
 	icon = 'modular_zubbers/icons/obj/storage/medkit.dmi'
 	icon_state = "lidocaine_box"
 	custom_price = PAYCHECK_LOWER * 3
-	spawn_type = /obj/item/reagent_containers/applicator/pill/lidocaine
-	spawn_count = 7
+
+/obj/item/storage/pill_bottle/lidocaine/PopulateContents()
+	for(var/i in 1 to 7)
+		new /obj/item/reagent_containers/applicator/pill/lidocaine(src)
 
 /obj/item/reagent_containers/applicator/pill/lidocaine
 	name = "lidocaine pill"

@@ -1096,7 +1096,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
 	},
-/obj/machinery/photocopier/prebuilt,
+/obj/machinery/photocopier,
 /turf/open/floor/carpet/green,
 /area/shuttle/pirate/nri)
 "MR" = (

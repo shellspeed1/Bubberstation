@@ -45,7 +45,7 @@
 	balloon_alert(user, "saved to multitool buffer")
 	return ITEM_INTERACT_SUCCESS
 
-/obj/machinery/porta_turret_cover/attackby(obj/item/I, mob/user, list/modifiers)
+/obj/machinery/porta_turret_cover/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_WRENCH && !parent_turret.on)
 		if(parent_turret.raised)
 			return

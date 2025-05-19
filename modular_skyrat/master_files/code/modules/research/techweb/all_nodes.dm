@@ -89,7 +89,6 @@
 /datum/techweb_node/office_equip/New()
 	design_ids += list(
 		"gbp_machine",
-		"plastic_hair_tie",
 	)
 	return ..()
 
@@ -97,6 +96,14 @@
 	design_ids += list(
 		"affection_module",
 		"borg_upgrade_artistic",
+	)
+	return ..()
+
+/datum/techweb_node/cafeteria_equip/New()
+	design_ids += list(
+		"bowl",
+		"drinking_glass",
+		"shot_glass",
 	)
 	return ..()
 
@@ -161,12 +168,6 @@
 		"nifsoft_hud_security",
 		"nifsoft_hud_diagnostic",
 		"nifsoft_hud_cargo",
-	)
-
-	design_ids -= list(
-		"ci-medhud",
-		"ci-diaghud",
-		"ci-sechud",
 	)
 	return ..()
 
@@ -247,15 +248,6 @@
 	design_ids += list(
 		"multi_cell_charger",
 	)
-
-	design_ids -= list(
-		"rcd_loaded",
-		"rcd_ammo",
-		"rtd_loaded",
-		"weldingmask",
-		"magboots",
-		"flatpacker",
-	)
 	return ..()
 
 /datum/techweb_node/mining/New()
@@ -301,5 +293,17 @@
 	)
 	design_ids -= list(
 		"borg_upgrade_pinpointer",
+	)
+	return ..()
+
+/datum/techweb_node/borg_service/New()
+	design_ids += list(
+		"borg_upgrade_botany"
+	)
+	return ..()
+
+/datum/techweb_node/borg_mining/New()
+	design_ids += list(
+		"borg_upgrade_welding",
 	)
 	return ..()

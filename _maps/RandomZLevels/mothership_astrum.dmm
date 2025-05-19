@@ -3185,6 +3185,9 @@
 /obj/effect/spawner/random/exotic/technology,
 /turf/open/floor/mineral/abductor,
 /area/awaymission/mothership_astrum/halls)
+"SV" = (
+/turf/closed/indestructible/alien,
+/area/space)
 "SX" = (
 /obj/structure/table/abductor,
 /obj/structure/window/spawner/directional/north,
@@ -27028,7 +27031,7 @@ Tu
 Tu
 Tu
 ee
-ee
+SV
 ee
 ee
 bV

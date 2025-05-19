@@ -57,19 +57,17 @@
 
 /obj/item/crusher_trophy/demon_claws/add_to(obj/item/kinetic_crusher/pkc, mob/living/user)
 	. = ..()
-	if(!.)
-		return
-	pkc.force_wielded += bonus_value * 0.2
-	pkc.detonation_damage += bonus_value * 0.8
-	pkc.update_wielding()
+	if(.)
+		pkc.force += bonus_value * 0.2
+		pkc.detonation_damage += bonus_value * 0.8
+		AddComponent(/datum/component/two_handed, force_wielded=(20 + bonus_value * 0.2))
 
 /obj/item/crusher_trophy/demon_claws/remove_from(obj/item/kinetic_crusher/pkc, mob/living/user)
 	. = ..()
-	if(!.)
-		return
-	pkc.force_wielded -= bonus_value * 0.2
-	pkc.detonation_damage -= bonus_value * 0.8
-	pkc.update_wielding()
+	if(.)
+		pkc.force -= bonus_value * 0.2
+		pkc.detonation_damage -= bonus_value * 0.8
+		AddComponent(/datum/component/two_handed, force_wielded=20)
 
 /obj/item/crusher_trophy/demon_claws/on_melee_hit(mob/living/target, mob/living/user)
 	user.heal_ordered_damage(bonus_value * 0.1, damage_heal_order)
@@ -154,17 +152,13 @@
 
 /obj/item/crusher_trophy/wendigo_horn/add_to(obj/item/kinetic_crusher/crusher, mob/living/user)
 	. = ..()
-	if(!.)
-		return
-	crusher.force_wielded += 20
-	crusher.update_wielding()
+	if(.)
+		crusher.AddComponent(/datum/component/two_handed, force_wielded=40)
 
 /obj/item/crusher_trophy/wendigo_horn/remove_from(obj/item/kinetic_crusher/crusher, mob/living/user)
 	. = ..()
-	if(!.)
-		return
-	crusher.force_wielded -= 20
-	crusher.update_wielding()
+	if(.)
+		crusher.AddComponent(/datum/component/two_handed, force_wielded=20)
 
 // Goliath Broodmother
 /obj/item/crusher_trophy/broodmother_tongue

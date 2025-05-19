@@ -128,7 +128,7 @@
 	. = ..()
 	. += "You can use your tendril hammer arm to deliver a devastating blow against mining fauna, but only once every two seconds."
 
-/obj/item/goliath_infuser_hammer/attack(mob/living/target, mob/living/carbon/human/user, list/modifiers)
+/obj/item/goliath_infuser_hammer/attack(mob/living/target, mob/living/carbon/human/user, click_parameters)
 	. = ..()
 
 	//If we're on cooldown, we'll do a normal attack.

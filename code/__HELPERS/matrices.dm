@@ -1,3 +1,8 @@
+//Luma coefficients suggested for HDTVs. If you change these, make sure they add up to 1.
+#define LUMA_R 0.213
+#define LUMA_G 0.715
+#define LUMA_B 0.072
+
 /// Datum which stores information about a matrix decomposed with decompose().
 /datum/decompose_matrix
 	///?
@@ -80,10 +85,6 @@ c f 1
 ///The Y pixel offset of this matrix
 /matrix/proc/get_y_shift()
 	. = f
-
-///The angle of this matrix
-/matrix/proc/get_angle()
-	. = -ATAN2(a,d)
 
 /////////////////////
 // COLOUR MATRICES //
@@ -216,3 +217,7 @@ round(cos_inv_third+sqrt3_sin, 0.001), round(cos_inv_third-sqrt3_sin, 0.001), ro
 				stack_trace(message)
 				return COLOR_MATRIX_IDENTITY
 			CRASH(message)
+
+#undef LUMA_R
+#undef LUMA_G
+#undef LUMA_B

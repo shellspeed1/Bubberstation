@@ -96,7 +96,7 @@
 	SIGNAL_HANDLER
 	examine_list += span_notice("[parent_weapon] is able to be imbued with a chemical at a reagent forge!")
 
-/datum/component/reagent_weapon/proc/inject_attacked(datum/source, mob/living/target, mob/living/user, list/modifiers)
+/datum/component/reagent_weapon/proc/inject_attacked(datum/source, mob/living/target, mob/living/user, params)
 	SIGNAL_HANDLER
 
 	//don't have the weapon or any imbued reagents? don't try

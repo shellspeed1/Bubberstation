@@ -105,8 +105,7 @@
 
 		. = newMeat // Return MEAT
 
-	if(!QDELETED(src))
-		qdel(src)
+	qdel(src)
 
 /obj/item/bodypart/arm/left/mutant/ghoul/drop_limb(special, dismembered, move_to_floor = TRUE)
 	..() // Create Meat, Remove Limb
@@ -117,8 +116,7 @@
 
 		. = newMeat // Return MEAT
 
-	if(!QDELETED(src))
-		qdel(src)
+	qdel(src)
 
 /obj/item/bodypart/leg/right/mutant/ghoul/drop_limb(special, dismembered, move_to_floor = TRUE)
 	..() // Create Meat, Remove Limb
@@ -129,8 +127,7 @@
 
 		. = newMeat // Return MEAT
 
-	if(!QDELETED(src))
-		qdel(src)
+	qdel(src)
 
 /obj/item/bodypart/leg/left/mutant/ghoul/drop_limb(special, dismembered, move_to_floor = TRUE)
 	..() // Create Meat, Remove Limb
@@ -141,8 +138,7 @@
 
 		. = newMeat // Return MEAT
 
-	if(!QDELETED(src))
-		qdel(src)
+	qdel(src)
 
 #undef GHOUL_BRUTE_MODIFIER
 #undef GHOUL_BURN_MODIFIER

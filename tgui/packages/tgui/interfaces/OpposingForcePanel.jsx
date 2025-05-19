@@ -27,7 +27,7 @@ export const OpposingForcePanel = (props) => {
     <Window
       title={'Opposing Force: ' + creator_ckey}
       width={585}
-      height={860}
+      height={840}
       theme={owner_antag ? 'syndicate' : 'admin'}
     >
       <Window.Content scrollable>
@@ -203,12 +203,11 @@ export const OpposingForceTab = (props) => {
       <Stack.Item>
         <Section title="Backstory">
           <TextArea
-            fluid
             disabled={!can_edit}
             height="100px"
             value={backstory}
-            placeholder="Provide a description of why you want to do bad things. Include specifics such as what lead upto the events that made you want to do bad things, think of it as though you were your character, react appropriately. (2000 char limit)"
-            onBlur={(value) =>
+            placeholder="Provide a description of why you want to do bad things. Include specifics such as what lead upto the events that made you want to do bad things, think of it as though you were your character, react appropriately. If you don't have any ideas, check the #player-shared-opfors channel for some. (2000 char limit)"
+            onChange={(_e, value) =>
               act('set_backstory', {
                 backstory: value,
               })
@@ -310,7 +309,7 @@ export const OpposingForceObjectives = (props) => {
                       width="100%"
                       placeholder="blank objective"
                       value={selectedObjective.title}
-                      onBlur={(value) =>
+                      onChange={(e, value) =>
                         act('set_objective_title', {
                           objective_ref: selectedObjective.ref,
                           title: value,
@@ -328,19 +327,13 @@ export const OpposingForceObjectives = (props) => {
                   <Stack.Item>
                     <Slider
                       disabled={!can_edit}
-                      step={1}
+                      step={0.1}
+                      stepPixelSize={0.1}
                       value={selectedObjective.intensity}
-                      format={(value) => round(value, 1)}
+                      format={(value) => round(value)}
                       minValue={0}
                       maxValue={500}
-                      ranges={{
-                        good: [0, 149],
-                        teal: [150, 249],
-                        olive: [250, 349],
-                        orange: [350, 449],
-                        red: [450, 500],
-                      }}
-                      onDrag={(_e, value) =>
+                      onDrag={(e, value) =>
                         act('set_objective_intensity', {
                           objective_ref: selectedObjective.ref,
                           new_intensity_level: value,
@@ -418,15 +411,21 @@ export const OpposingForceObjectives = (props) => {
               </Stack.Item>
               <Stack.Item>
                 <Stack vertical mt={2}>
-                  <Stack.Item>Description</Stack.Item>
+                  <Stack.Item>
+                    Description
+                    <Button
+                      icon="info"
+                      tooltip="Input objective description here, be descriptive about what you want to do, such as 'Destroy the Death Star' or 'Destroy the Death Star and the Death Star Base' (1000 char limit)."
+                      color="light-gray"
+                    />
+                  </Stack.Item>
                   <Stack.Item>
                     <TextArea
                       fluid
                       disabled={!can_edit}
                       height="85px"
                       value={selectedObjective.description}
-                      placeholder="Input objective description here, be descriptive about what you want to do, such as 'Destroy the Death Star' or 'Destroy the Death Star and the Death Star Base' (1000 char limit)."
-                      onBlur={(value) =>
+                      onChange={(e, value) =>
                         act('set_objective_description', {
                           objective_ref: selectedObjective.ref,
                           new_desciprtion: value,
@@ -438,15 +437,20 @@ export const OpposingForceObjectives = (props) => {
               </Stack.Item>
               <Stack.Item>
                 <Stack vertical mt={2}>
-                  <Stack.Item>Justification</Stack.Item>
+                  <Stack.Item>
+                    Justification
+                    <Button
+                      icon="info"
+                      tooltip="Input justification for the objective here, make sure you have a good reason for the objective (1000 char limit)."
+                      color="light-gray"
+                    />
+                  </Stack.Item>
                   <Stack.Item>
                     <TextArea
-                      fluid
                       disabled={!can_edit}
                       height="85px"
                       value={selectedObjective.justification}
-                      placeholder="Input justification for the objective here, make sure you have a good reason for the objective (1000 char limit)."
-                      onBlur={(value) =>
+                      onChange={(e, value) =>
                         act('set_objective_justification', {
                           objective_ref: selectedObjective.ref,
                           new_justification: value,
@@ -535,7 +539,7 @@ export const EquipmentTab = (props) => {
                   width="100%"
                   placeholder="Reason for item"
                   value={equipment.reason}
-                  onBlur={(value) =>
+                  onChange={(e, value) =>
                     act('set_equipment_reason', {
                       selected_equipment_ref: equipment.ref,
                       new_equipment_reason: value,
@@ -610,7 +614,7 @@ export const AdminChatTab = (props) => {
           selfClear
           placeholder="Send a message or command using '/'"
           mt={1}
-          onEnter={(value) =>
+          onEnter={(e, value) =>
             act('send_message', {
               message: value,
             })

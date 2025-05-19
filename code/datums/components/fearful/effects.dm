@@ -78,7 +78,9 @@
 		span_alert("The shadows begin to creep up from the corners of your vision, and then there is nothing..."),
 		span_hear("You hear something heavy collide with the ground."),
 	)
-	owner.apply_status_effect(/datum/status_effect/heart_attack)
+	var/datum/disease/heart_failure/heart_attack = new(src)
+	heart_attack.stage_prob = 2 //Advances twice as fast
+	owner.ForceContractDisease(heart_attack)
 	owner.Unconscious(20 SECONDS)
 
 /// Low chance to vomit when terrified, increases significantly during panic attacks

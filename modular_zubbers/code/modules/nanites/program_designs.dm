@@ -1,7 +1,7 @@
 /datum/design/nanites
 	name = "None"
 	desc = "Warn a coder if you see this."
-	id = DESIGN_ID_IGNORE
+	id = "default_nanites"
 	build_type = NANITE_COMPILER
 	construction_time = 50
 	category = list()
@@ -61,14 +61,12 @@
 	program_type = /datum/nanite_program/nanite_debugging
 	category = list("Utility Nanites")
 
-/*
 /datum/design/nanites/access
 	name = "Subdermal ID"
 	desc = "The nanites store the host's ID access rights in a subdermal magnetic strip. Updates when triggered, copying the host's current access."
 	id = "access_nanites"
 	program_type = /datum/nanite_program/access
 	category = list("Utility Nanites")
-*/
 
 /datum/design/nanites/relay
 	name = "Relay"
@@ -98,7 +96,6 @@
 	program_type = /datum/nanite_program/emp
 	category = list("Utility Nanites")
 
-/*
 /datum/design/nanites/spreading
 	name = "Infective Exo-Locomotion"
 	desc = "The nanites gain the ability to survive for brief periods outside of the human body, as well as the ability to start new colonies without an integration process; \
@@ -106,7 +103,6 @@
 	id = "spreading_nanites"
 	program_type = /datum/nanite_program/spreading
 	category = list("Utility Nanites")
-*/
 
 /datum/design/nanites/nanite_sting
 	name = "Nanite Sting"
@@ -131,7 +127,6 @@
 	program_type = /datum/nanite_program/regenerative
 	category = list("Medical Nanites")
 
-/*
 /datum/design/nanites/regenerative_advanced
 	name = "Bio-Reconstruction"
 	desc = "The nanites manually repair and replace organic cells, acting much faster than normal regeneration. \
@@ -139,7 +134,6 @@
 	id = "regenerative_plus_nanites"
 	program_type = /datum/nanite_program/regenerative/advanced
 	category = list("Medical Nanites")
-*/
 
 /datum/design/nanites/temperature
 	name = "Temperature Adjustment"
@@ -245,7 +239,6 @@
 
 ////////////////////DEFECTIVE NANITES//////////////////////////////////////
 
-/*
 /datum/design/nanites/glitch
 	name = "Glitch"
 	desc = "A heavy software corruption that causes nanites to gradually break down."
@@ -301,7 +294,6 @@
 	id = "braindecay_nanites"
 	program_type = /datum/nanite_program/brain_decay
 	category = list("Defective Nanites")
-*/
 
 ////////////////////WEAPONIZED NANITES/////////////////////////////////////
 
@@ -355,7 +347,6 @@
 	program_type = /datum/nanite_program/pyro
 	category = list("Weaponized Nanites")
 
-/*
 /datum/design/nanites/heart_stop
 	name = "Heart-Stopper"
 	desc = "Stops the host's heart when triggered; restarts it if triggered again."
@@ -369,7 +360,6 @@
 	id = "explosive_nanites"
 	program_type = /datum/nanite_program/explosive
 	category = list("Weaponized Nanites")
-*/
 
 /datum/design/nanites/mind_control
 	name = "Mind Control"
@@ -443,14 +433,12 @@
 	program_type = /datum/nanite_program/comm/voice
 	category = list("Suppression Nanites")
 
-/*
 /datum/design/nanites/speech
 	name = "Forced Speech"
 	desc = "The nanites force the host to say a pre-programmed sentence when triggered."
 	id = "speech_nanites"
 	program_type = /datum/nanite_program/comm/speech
 	category = list("Suppression Nanites")
-*/
 
 /datum/design/nanites/hallucination
 	name = "Hallucination"

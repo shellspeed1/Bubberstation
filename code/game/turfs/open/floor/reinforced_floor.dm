@@ -34,7 +34,7 @@
 		return ..()
 	return //unplateable
 
-/turf/open/floor/engine/try_replace_tile(obj/item/stack/tile/T, mob/user, list/modifiers)
+/turf/open/floor/engine/try_replace_tile(obj/item/stack/tile/T, mob/user, params)
 	return
 
 /turf/open/floor/engine/crowbar_act(mob/living/user, obj/item/I)

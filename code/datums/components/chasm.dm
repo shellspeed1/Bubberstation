@@ -67,7 +67,7 @@
 	drop_stuff(movable)
 
 /datum/component/chasm/proc/block_teleport()
-	return TRUE
+	return COMPONENT_BLOCK_TELEPORT
 
 /datum/component/chasm/proc/on_chasm_stopped(datum/source)
 	SIGNAL_HANDLER

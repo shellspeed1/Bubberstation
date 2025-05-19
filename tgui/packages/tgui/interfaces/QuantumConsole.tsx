@@ -143,39 +143,33 @@ function AccessView(props) {
       <Stack.Item grow>
         <Section
           buttons={
-            <Stack fill>
-              <Tooltip
-                content="Toggles whether you broadcast your
+            <>
+              <Button.Checkbox
+                checked={broadcasting}
+                disabled={broadcasting_on_cd}
+                onClick={() => act('broadcast')}
+                tooltip="Toggles whether you broadcast your
                   bitrun to station Entertainment Monitors."
               >
-                <Button.Checkbox
-                  checked={broadcasting}
-                  disabled={broadcasting_on_cd}
-                  onClick={() => act('broadcast')}
-                >
-                  Broadcast
-                </Button.Checkbox>
-              </Tooltip>
-              <Tooltip
-                content="Get a random domain for more rewards.
+                Broadcast
+              </Button.Checkbox>
+              <Button
+                disabled={
+                  !ready || occupants > 0 || points < 1 || !!generated_domain
+                }
+                icon="random"
+                onClick={() => act('random_domain')}
+                mr={1}
+                tooltip="Get a random domain for more rewards.
                   Weighted towards your current points. Minimum: 1 point."
               >
-                <Button
-                  disabled={
-                    !ready || occupants > 0 || points < 1 || !!generated_domain
-                  }
-                  icon="random"
-                  onClick={() => act('random_domain')}
-                  mr={1}
-                >
-                  Randomize
-                </Button>
-              </Tooltip>
+                Randomize
+              </Button>
               <Tooltip content="Accrued points for purchasing domains.">
                 <Icon color="pink" name="star" mr={1} />
                 {points}
               </Tooltip>
-            </Stack>
+            </>
           }
           fill
           scrollable
@@ -234,14 +228,13 @@ function AccessView(props) {
               <NoticeBox info={!!generated_domain}>{selected}</NoticeBox>
             </Stack.Item>
             <Stack.Item>
-              <Tooltip content="Begins shutdown. Will notify anyone connected.">
-                <Button.Confirm
-                  disabled={!ready || !generated_domain}
-                  onClick={() => act('stop_domain')}
-                >
-                  Stop Domain
-                </Button.Confirm>
-              </Tooltip>
+              <Button.Confirm
+                disabled={!ready || !generated_domain}
+                onClick={() => act('stop_domain')}
+                tooltip="Begins shutdown. Will notify anyone connected."
+              >
+                Stop Domain
+              </Button.Confirm>
             </Stack.Item>
           </Stack>
         </Section>
@@ -290,15 +283,14 @@ function DomainEntry(props: DomainEntryProps) {
   return (
     <Collapsible
       buttons={
-        <Tooltip content={!!generated_domain && 'Stop current domain first.'}>
-          <Button
-            disabled={!!generated_domain || !ready || occupied || points < cost}
-            icon={buttonIcon}
-            onClick={() => act('set_domain', { id })}
-          >
-            {buttonName}
-          </Button>
-        </Tooltip>
+        <Button
+          disabled={!!generated_domain || !ready || occupied || points < cost}
+          icon={buttonIcon}
+          onClick={() => act('set_domain', { id })}
+          tooltip={!!generated_domain && 'Stop current domain first.'}
+        >
+          {buttonName}
+        </Button>
       }
       color={getColor(difficulty)}
       title={
@@ -362,11 +354,13 @@ const AvatarDisplay = (props) => {
             </Stack.Item>
           )}
           <Stack.Item>
-            <Tooltip content="Refresh avatar data.">
-              <Button icon="sync" onClick={() => act('refresh')}>
-                Refresh
-              </Button>
-            </Tooltip>
+            <Button
+              icon="sync"
+              onClick={() => act('refresh')}
+              tooltip="Refresh avatar data."
+            >
+              Refresh
+            </Button>
           </Stack.Item>
         </Stack>
       }

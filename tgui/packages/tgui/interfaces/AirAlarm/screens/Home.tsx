@@ -36,7 +36,7 @@ export function AirAlarmControlHome(props: Props) {
           Area Atmosphere Alarm
         </Button>
       </Stack.Item>
-      <Stack.Item mb={1}>
+      <Stack.Item mb={2}>
         <Button
           icon={isPanicSiphoning ? 'exclamation-triangle' : 'exclamation'}
           color={isPanicSiphoning && 'danger'}

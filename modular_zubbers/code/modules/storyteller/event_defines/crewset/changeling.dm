@@ -7,7 +7,6 @@
 	weight = 8
 	min_players = 20
 	maximum_antags_global = 4
-	restricted_species = list(SPECIES_PROTEAN)
 
 	tags = list(TAG_COMBAT, TAG_CREW_ANTAG)
 

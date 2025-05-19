@@ -71,10 +71,9 @@ export function OrbitSearchBar(props) {
             autoFocus
             fluid
             onEnter={orbitMostRelevant}
-            onChange={setSearchQuery}
+            onInput={(event, value) => setSearchQuery(value)}
             placeholder="Search..."
             value={searchQuery}
-            expensive
           />
         </Stack.Item>
         <Stack.Divider />
@@ -87,18 +86,16 @@ export function OrbitSearchBar(props) {
             tooltipPosition="bottom-start"
           />
         </Stack.Item>
-        {!!data.can_observe && (
-          <Stack.Item>
-            <Button
-              color={autoObserve ? 'good' : 'transparent'}
-              icon={autoObserve ? 'toggle-on' : 'toggle-off'}
-              onClick={() => setAutoObserve(!autoObserve)}
-              tooltip={`Toggle Auto-Observe. When active, you'll
+        <Stack.Item>
+          <Button
+            color={autoObserve ? 'good' : 'transparent'}
+            icon={autoObserve ? 'toggle-on' : 'toggle-off'}
+            onClick={() => setAutoObserve(!autoObserve)}
+            tooltip={`Toggle Auto-Observe. When active, you'll
             see the UI / full inventory of whoever you're orbiting. Neat!`}
-              tooltipPosition="bottom-start"
-            />
-          </Stack.Item>
-        )}
+            tooltipPosition="bottom-start"
+          />
+        </Stack.Item>
         <Stack.Item>
           <Button
             color="transparent"

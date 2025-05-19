@@ -474,7 +474,6 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/carpenter_hammer/Initialize(mapload)
 	. = ..()
-	AddElement(/datum/element/kneejerk)
 	AddComponent(/datum/component/item_killsound, \
 	allowed_mobs = list(/mob/living/carbon/human), \
 	killsound = 'sound/items/weapons/hammer_death_scream.ogg', \
@@ -1006,7 +1005,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	thrown_datums.Cut()
 	return ..()
 
-/obj/item/melee/baseball_bat/pre_attack(atom/movable/target, mob/living/user, list/modifiers)
+/obj/item/melee/baseball_bat/pre_attack(atom/movable/target, mob/living/user, params)
 	var/turf/target_turf = get_turf(target)
 	if(!target_turf)
 		return ..()
@@ -1132,7 +1131,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		))
 
 
-/obj/item/melee/flyswatter/afterattack(atom/target, mob/user, list/modifiers)
+/obj/item/melee/flyswatter/afterattack(atom/target, mob/user, click_parameters)
 	if(is_type_in_typecache(target, splattable))
 		to_chat(user, span_warning("You easily splat [target]."))
 		if(isliving(target))
@@ -1169,11 +1168,12 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	name = "\improper ACME Extendo-Hand"
 	desc = "A novelty extendo-hand produced by the ACME corporation. Originally designed to knock out roadrunners."
 
-/obj/item/extendohand/attack(atom/M, mob/living/carbon/human/user, list/modifiers)
+/obj/item/extendohand/attack(atom/M, mob/living/carbon/human/user, params)
 	var/dist = get_dist(M, user)
 	if(dist < min_reach)
 		to_chat(user, span_warning("[M] is too close to use [src] on."))
 		return
+	var/list/modifiers = params2list(params)
 	M.attack_hand(user, modifiers)
 
 /obj/item/gohei
@@ -1281,16 +1281,16 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		return TRUE
 	return FALSE
 
-/obj/item/highfrequencyblade/pre_attack(atom/target, mob/living/user, list/modifiers)
+/obj/item/highfrequencyblade/pre_attack(atom/A, mob/living/user, params)
 	. = ..()
 	if(.)
 		return .
 	if(!HAS_TRAIT(src, TRAIT_WIELDED))
 		return . // Default attack
-	if(isliving(target) && HAS_TRAIT(src, TRAIT_PACIFISM))
+	if(isliving(A) && HAS_TRAIT(src, TRAIT_PACIFISM))
 		return . // Default attack (ultimately nothing)
 
-	return slash(target, user, modifiers)
+	return slash(A, user, params)
 
 /// triggered on wield of two handed item
 /obj/item/highfrequencyblade/proc/on_wield(obj/item/source, mob/user)
@@ -1300,8 +1300,9 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 /obj/item/highfrequencyblade/proc/on_unwield(obj/item/source, mob/user)
 	update_icon(UPDATE_ICON_STATE)
 
-/obj/item/highfrequencyblade/proc/slash(atom/target, mob/living/user, list/modifiers)
+/obj/item/highfrequencyblade/proc/slash(atom/target, mob/living/user, params)
 	user.do_attack_animation(target, "nothing")
+	var/list/modifiers = params2list(params)
 	var/damage_mod = 1
 	var/x_slashed = text2num(modifiers[ICON_X]) || ICON_SIZE_X/2 //in case we arent called by a client
 	var/y_slashed = text2num(modifiers[ICON_Y]) || ICON_SIZE_Y/2 //in case we arent called by a client

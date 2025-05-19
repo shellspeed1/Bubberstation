@@ -170,15 +170,9 @@
 	. = ..()
 	if (. & EMP_PROTECT_SELF)
 		return
-
-	var/mecha_explodies_vulnerability = (severity * capacitor.rating) //The more severe the EMP, the worse the outcome. The higher the tier of the capacitor, the less severe the outcome.
-
 	if(get_charge())
-		use_energy(round((cell.maxcharge / 2) / mecha_explodies_vulnerability, 1))
-
-	var/how_hard_are_we_explodies = rand(MECH_EMP_DAMAGE_LOWER, MECH_EMP_DAMAGE_UPPER)
-	take_damage(how_hard_are_we_explodies / mecha_explodies_vulnerability, BURN)
-
+		use_energy((cell.charge/3)/(severity*2))
+		take_damage(30 / severity, BURN, ENERGY, 1)
 	log_message("EMP detected", LOG_MECHA, color="red")
 
 	//Mess with the focus of the inbuilt camera if present
@@ -210,14 +204,14 @@
 			cookedalive.adjust_fire_stacks(1)
 			cookedalive.ignite_mob()
 
-/obj/vehicle/sealed/mecha/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
+/obj/vehicle/sealed/mecha/attackby_secondary(obj/item/weapon, mob/user, params)
 	if(istype(weapon, /obj/item/mecha_parts))
 		var/obj/item/mecha_parts/parts = weapon
 		parts.try_attach_part(user, src, TRUE)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	return ..()
 
-/obj/vehicle/sealed/mecha/attackby(obj/item/weapon, mob/living/user, list/modifiers)
+/obj/vehicle/sealed/mecha/attackby(obj/item/weapon, mob/living/user, params)
 	if(user.combat_mode)
 		return ..()
 	if(istype(weapon, /obj/item/mmi))
@@ -323,7 +317,7 @@
 	if(!attacking_item.force)
 		return
 
-	var/damage_taken = take_damage(attacking_item.force * attacking_item.get_demolition_modifier(src), attacking_item.damtype, MELEE, 1, get_dir(src, user))
+	var/damage_taken = take_damage(attacking_item.force * attacking_item.demolition_mod, attacking_item.damtype, MELEE, 1, get_dir(src, user))
 	try_damage_component(damage_taken, user.zone_selected)
 
 	var/hit_verb = length(attacking_item.attack_verb_simple) ? "[pick(attacking_item.attack_verb_simple)]" : "hit"
@@ -420,18 +414,19 @@
 	while(atom_integrity < max_integrity)
 		if(W.use_tool(src, user, 2.5 SECONDS, volume=50))
 			did_the_thing = TRUE
-			repair_damage(10)
+			atom_integrity += min(10, (max_integrity - atom_integrity))
 			audible_message(span_hear("You hear welding."))
 		else
 			break
 	if(did_the_thing)
 		user.balloon_alert_to_viewers("[(atom_integrity >= max_integrity) ? "fully" : "partially"] repaired [src]")
+		diag_hud_set_mechhealth()
 	else
 		user.balloon_alert_to_viewers("stopped welding [src]", "interrupted the repair!")
 
 
 /obj/vehicle/sealed/mecha/proc/full_repair(charge_cell)
-	repair_damage(max_integrity)
+	atom_integrity = max_integrity
 	if(cell && charge_cell)
 		cell.charge = cell.maxcharge
 		diag_hud_set_mechcell()
@@ -445,9 +440,6 @@
 		clear_internal_damage(MECHA_CABIN_AIR_BREACH)
 	if(internal_damage & MECHA_INT_CONTROL_LOST)
 		clear_internal_damage(MECHA_INT_CONTROL_LOST)
-
-/obj/vehicle/sealed/mecha/repair_damage(amount)
-	. = ..()
 	diag_hud_set_mechhealth()
 
 /obj/vehicle/sealed/mecha/narsie_act()

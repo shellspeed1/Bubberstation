@@ -12,7 +12,7 @@ export class PrimaryView extends Component {
   // Reference that gets passed to the <Section> holding the main preview.
   // Eventually gets filled with a reference to the section's scroll bar
   // funtionality.
-  scrollableRef: RefObject<HTMLDivElement | null>;
+  scrollableRef: RefObject<HTMLDivElement>;
 
   // The last recorded distance the scrollbar was from the bottom.
   // Used to implement "text scrolls up instead of down" behaviour.
@@ -105,6 +105,7 @@ export class PrimaryView extends Component {
                     </Box>
                     <Button.Confirm
                       disabled={!savableData || tooManyCharacters}
+                      content="Save"
                       color="good"
                       onClick={() => {
                         if (textAreaText.length) {
@@ -118,23 +119,21 @@ export class PrimaryView extends Component {
                           setInputFieldData({});
                         }
                       }}
-                    >
-                      Save
-                    </Button.Confirm>
+                    />
                   </>
                 }
               >
                 <TextArea
-                  style={{ border: 'none' }}
+                  scrollbar
+                  noborder
                   value={textAreaText}
                   textColor={useColor}
                   fontFamily={useFont}
                   bold={useBold}
                   height="100%"
-                  fluid
                   backgroundColor={paper_color}
-                  onChange={(value) => {
-                    setTextAreaText(value);
+                  onInput={(e, text) => {
+                    setTextAreaText(text);
 
                     if (this.scrollableRef.current) {
                       let thisDistFromBottom =

@@ -1,3 +1,5 @@
+
+
 /*
  * Simple helper to generate a string of
  * garbled symbols up to [length] characters.
@@ -358,7 +360,7 @@
  * and have mansus grasp active in their offhand,
  * they're able to draw a transmutation rune.
  */
-/datum/antagonist/heretic/proc/on_item_use(mob/living/source, atom/target, obj/item/weapon, list/modifiers)
+/datum/antagonist/heretic/proc/on_item_use(mob/living/source, atom/target, obj/item/weapon, click_parameters)
 	SIGNAL_HANDLER
 	if(!is_type_in_typecache(weapon, scribing_tools))
 		return NONE

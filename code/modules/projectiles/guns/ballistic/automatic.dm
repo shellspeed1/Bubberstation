@@ -182,7 +182,8 @@
 /obj/item/gun/ballistic/automatic/m90/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(isammocasing(tool))
 		if(istype(tool, underbarrel.magazine.ammo_type))
-			underbarrel.item_interaction(user, tool, modifiers)
+			underbarrel.attack_self(user)
+			underbarrel.attackby(tool, user, list2params(modifiers))
 		return ITEM_INTERACT_BLOCKING
 	return ..()
 
@@ -311,7 +312,7 @@
 		return
 	..()
 
-/obj/item/gun/ballistic/automatic/l6_saw/attackby(obj/item/A, mob/user, list/modifiers)
+/obj/item/gun/ballistic/automatic/l6_saw/attackby(obj/item/A, mob/user, params)
 	if(!cover_open && istype(A, accepted_magazine_type))
 		balloon_alert(user, "open the cover!")
 		return

@@ -8,7 +8,6 @@
 
 	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_EXTERNAL_SYNTH_SCREEN
-	organ_flags = ORGAN_EXTERNAL
 
 	preference = "feature_ipc_screen"
 

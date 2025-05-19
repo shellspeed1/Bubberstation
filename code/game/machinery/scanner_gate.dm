@@ -93,7 +93,6 @@
 		COMSIG_ATOM_ENTERED = PROC_REF(on_entered),
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
-	AddComponent(/datum/component/simple_rotation, ROTATION_IGNORE_ANCHORED|ROTATION_REQUIRE_WRENCH|ROTATION_NEEDS_UNBLOCKED)
 	register_context()
 
 /obj/machinery/scanner_gate/Destroy(force)
@@ -104,10 +103,6 @@
 	. = ..()
 	for(var/datum/stock_part/scanning_module/scanning_module in component_parts)
 		minus_false_beep = scanning_module.tier //The better are scanninning modules - the lower is chance of False Positives
-
-/obj/machinery/scanner_gate/setDir(newdir)
-	. = ..()
-	scanline?.setDir(newdir)
 
 /obj/machinery/scanner_gate/examine(mob/user)
 	. = ..()
@@ -151,7 +146,7 @@
 		return
 	set_scanline("passive")
 
-/obj/machinery/scanner_gate/attackby(obj/item/attacking_item, mob/user, list/modifiers)
+/obj/machinery/scanner_gate/attackby(obj/item/attacking_item, mob/user, params)
 	var/obj/item/card/id/card = attacking_item.GetID()
 	if(card)
 		if(locked)

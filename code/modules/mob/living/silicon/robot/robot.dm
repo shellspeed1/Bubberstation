@@ -48,10 +48,12 @@
 			lawupdate = FALSE
 
 	if(!scrambledcodes && !builtInCamera)
-		builtInCamera = new(src)
+		builtInCamera = new (src)
 		builtInCamera.c_tag = real_name
+		builtInCamera.network = list(CAMERANET_NETWORK_SS13)
+		builtInCamera.internal_light = FALSE
 		if(wires.is_cut(WIRE_CAMERA))
-			builtInCamera.camera_enabled = FALSE
+			builtInCamera.camera_enabled = 0
 	update_icons()
 	. = ..()
 
@@ -75,9 +77,6 @@
 			mmi.brainmob.container = mmi
 			mmi.update_appearance()
 		setup_default_name()
-
-		if(mmi.brainmob)
-			gender = mmi.brainmob.gender
 
 	aicamera = new/obj/item/camera/siliconcam/robot_camera(src)
 	toner = tonermax
@@ -910,8 +909,6 @@
 		builtInCamera.c_tag = real_name //update the camera name too
 	mainframe = AI
 	deployed = TRUE
-	if(AI.client)
-		set_gender(AI.client)
 	set_connected_ai(mainframe)
 	mainframe.connected_robots |= src
 	lawupdate = TRUE
@@ -920,7 +917,6 @@
 		if((AI.radio.special_channels & RADIO_SPECIAL_SYNDIE))
 			radio.make_syndie()
 		radio.subspace_transmission = TRUE
-		radio.command = TRUE
 		radio.channels = AI.radio.channels
 		for(var/chan in radio.channels)
 			radio.secure_radio_connections[chan] = add_radio(radio, GLOB.radiochannels[chan])
@@ -953,7 +949,6 @@
 	deployed = FALSE
 	mainframe.deployed_shell = null
 	undeployment_action.Remove(src)
-	REMOVE_TRAIT(src, TRAIT_LOUD_BINARY, REF(mainframe))
 	if(radio) //Return radio to normal
 		radio.recalculateChannels()
 	if(!QDELETED(builtInCamera))

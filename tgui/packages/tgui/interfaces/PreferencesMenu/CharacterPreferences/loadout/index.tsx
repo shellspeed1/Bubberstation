@@ -18,7 +18,7 @@ import {
 import { removeAllSkiplines } from '../../../TextInputModal';
 import { PreferencesMenuData } from '../../types';
 import { useServerPrefs } from '../../useServerPrefs';
-import type {
+import {
   LoadoutCategory,
   LoadoutItem,
   LoadoutManagerData,
@@ -106,8 +106,10 @@ export function LoadoutPage(props) {
                   placeholder="Maximum of 24 characters long"
                   width="100%"
                   maxLength={24}
-                  onChange={onType}
-                  onEnter={() => {
+                  onChange={(_, value) => onType(value)}
+                  onInput={(_, value) => onType(value)}
+                  onEnter={(event) => {
+                    event.preventDefault();
                     act(`${managingPreset.toLowerCase()}_loadout_preset`, {
                       name: input,
                     });
@@ -146,7 +148,7 @@ export function LoadoutPage(props) {
           buttons={
             <Input
               width="200px"
-              onChange={setSearchLoadout}
+              onInput={(_, value) => setSearchLoadout(value)}
               placeholder="Search for an item..."
               value={searchLoadout}
             />
@@ -289,7 +291,7 @@ function LoadoutTabs(props: LoadoutTabsProps) {
       <Stack.Item grow>
         {searching || activeCategory?.contents ? (
           <Section
-            title={searching ? 'Search results' : 'Catalog'}
+            title={searching ? 'Searching...' : 'Catalog'}
             fill
             scrollable
             buttons={

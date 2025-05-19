@@ -357,31 +357,31 @@ export const sendAct = (action: string, payload: object = {}) => {
     logger.error(`Payload for act() must be an object, got this:`, payload);
     return;
   }
-
-  const stringifiedPayload = JSON.stringify(payload);
-  const urlSize = Object.entries({
-    type: 'act/' + action,
-    payload: stringifiedPayload,
-    tgui: 1,
-    windowId: Byond.windowId,
-  }).reduce(
-    (url, [key, value], i) =>
-      url +
-      `${i > 0 ? '&' : '?'}${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
-    '',
-  ).length;
-  if (urlSize > 2048) {
-    let chunks: string[] = stringifiedPayload.split(chunkSplitter);
-    const id = `${Date.now()}`;
-    globalStore?.dispatch(backendCreatePayloadQueue({ id, chunks }));
-    Byond.sendMessage('oversizedPayloadRequest', {
+  if (!Byond.TRIDENT) {
+    const stringifiedPayload = JSON.stringify(payload);
+    const urlSize = Object.entries({
       type: 'act/' + action,
-      id,
-      chunkCount: chunks.length,
-    });
-    return;
+      payload: stringifiedPayload,
+      tgui: 1,
+      windowId: Byond.windowId,
+    }).reduce(
+      (url, [key, value], i) =>
+        url +
+        `${i > 0 ? '&' : '?'}${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
+      '',
+    ).length;
+    if (urlSize > 2048) {
+      let chunks: string[] = stringifiedPayload.split(chunkSplitter);
+      const id = `${Date.now()}`;
+      globalStore?.dispatch(backendCreatePayloadQueue({ id, chunks }));
+      Byond.sendMessage('oversizedPayloadRequest', {
+        type: 'act/' + action,
+        id,
+        chunkCount: chunks.length,
+      });
+      return;
+    }
   }
-
   Byond.sendMessage('act/' + action, payload);
 };
 
@@ -399,7 +399,6 @@ type BackendState<TData> = {
       size: [number, number];
       fancy: BooleanLike;
       locked: BooleanLike;
-      scale: BooleanLike;
     };
     client: {
       ckey: string;

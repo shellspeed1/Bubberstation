@@ -59,6 +59,7 @@ function CharacterProfiles(props: ProfileProps) {
     <Stack align="center" justify="left">
       <Stack.Item width="285px">
         <SideDropdown
+          width="100%"
           selected={profiles[activeSlot]}
           options={profiles.map((profile, slot) => ({
             value: slot,

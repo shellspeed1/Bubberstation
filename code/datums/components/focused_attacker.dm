@@ -48,7 +48,7 @@
 	register_new_target(target)
 
 /// Before an item attacks, try increasing its attack power
-/datum/component/focused_attacker/proc/pre_item_attack(obj/item/weapon, atom/target, mob/user, list/modifiers)
+/datum/component/focused_attacker/proc/pre_item_attack(obj/item/weapon, atom/target, mob/user, params)
 	SIGNAL_HANDLER
 	if (target == last_target)
 		if (weapon.force - initial(weapon.force) < maximum_gain)

@@ -15,7 +15,7 @@
 	spans = list(SPAN_ROBOT)
 	secret = TRUE
 
-/datum/language/ratvar/scramble_sentence(input, list/mutual_languages)
+/datum/language/ratvar/scramble(input)
 	return text2ratvar(input)
 
 //Regexes used to alter english to ratvarian style

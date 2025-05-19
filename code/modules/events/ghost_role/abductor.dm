@@ -20,13 +20,8 @@
 		return NOT_ENOUGH_PLAYERS
 
 	SSmapping.lazy_load_template(LAZY_TEMPLATE_KEY_ABDUCTOR_SHIPS)
-	// BUBBER CHANGE: NO ABDUCTOR PREFS
-	var/mob/living/carbon/human/agent = new
-	var/mob/living/carbon/human/scientist = new
-
-	agent.PossessByPlayer(candidates[1].ckey)
-	scientist.PossessByPlayer(candidates[2].ckey)
-	// BUBBER CHANGE END
+	var/mob/living/carbon/human/agent = make_body(pick_n_take(candidates))
+	var/mob/living/carbon/human/scientist = make_body(pick_n_take(candidates))
 
 	var/datum/team/abductor_team/T = new
 	if(T.team_number > ABDUCTOR_MAX_TEAMS)
